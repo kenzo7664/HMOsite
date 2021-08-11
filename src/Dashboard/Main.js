@@ -7,11 +7,14 @@ import claims from "./refund.png";
 function Main() {
   return (
     <>
+      <div>
+        <h1 className = "msg">WELCOME</h1>
+      </div>
       <div className='mainwrapper'>
         <div className='sub-mainwrapper1'>
           <div className='wrapper1'>
             <div className='sub-wrapper1'>
-              <a href='#' className='itenary'>
+              <a href='https://www.youtube.com' className='itenary'>
                 Clients
               </a>
               <br />
@@ -21,7 +24,7 @@ function Main() {
           </div>
           <div className='wrapper1'>
             <div className='sub-wrapper1'>
-              <a href='#' className='itenary'>
+              <a href='https://www.youtube.com' className='itenary'>
                 Principals
               </a>
               <br />
@@ -31,7 +34,7 @@ function Main() {
           </div>
           <div className='wrapper1'>
             <div className='sub-wrapper1'>
-              <a href='#' className='itenary'>
+              <a href='https://www.youtube.com' className='itenary'>
                 Claims
               </a>
               <br />
@@ -41,7 +44,7 @@ function Main() {
           </div>
           <div className='wrapper1'>
             <div className='sub-wrapper1'>
-              <a href='#' className='itenary'>
+              <a href='https://www.youtube.com' className='itenary'>
                 Capitations
               </a>
               <br />
@@ -53,7 +56,7 @@ function Main() {
         <div className='sub-mainwrapper2'>
           <div className='wrapper2'>
             <div className='sub-wrapper2'>
-              <a href='#' className='itenary'>
+              <a href='https://www.youtube.com' className='itenary'>
                 Providers
               </a>
               <br />
@@ -63,7 +66,7 @@ function Main() {
           </div>
           <div className='wrapper2'>
             <div className='sub-wrapper2'>
-              <a href='#' className='itenary'>
+              <a href='https://www.youtube.com' className='itenary'>
                 ID cards
               </a>
               <br />
@@ -73,7 +76,7 @@ function Main() {
           </div>
           <div className='wrapper2'>
             <div className='sub-wrapper2'>
-              <a href='#' className='itenary'>
+              <a href='https://www.youtube.com' className='itenary'>
                 Authorizations
               </a>
               <br />
@@ -83,7 +86,7 @@ function Main() {
           </div>
           <div className='wrapper2'>
             <div className='sub-wrapper2'>
-              <a href='#' className='itenary'>
+              <a href='https://www.youtube.com' className='itenary'>
                 Errors
               </a>
               <br />

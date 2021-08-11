@@ -1,4 +1,53 @@
 .welcome-text {
   color: royalblue;
-  font-size: 17px;
+  font-size: 23px;
+ 
+  
 }
+
+.icn {
+    font-size: 20px;
+    position: fixed;
+    right: 8%;
+    top: 1%;
+}
+
+.icon{
+  display: none;
+}
+@media screen and (max-width:400px) {
+  .welcome-text {
+    margin-left: -78%;
+    margin-top: 5%;
+  }
+
+  .icn{
+    display: none;
+  }
+
+  .icon {
+    display: block;
+    margin-top: -40%;
+    margin-left: 36%;
+    font-size: 20px;
+  } 
+}
+
+@media screen and (min-width: 402px)and (max-width: 430px) {
+  .welcome-text {
+    margin-left: -78%;
+    margin-top: 5%;
+  }
+
+  .icn{
+    display: none;
+  }
+
+  .icon {
+    display: block;
+    margin-top: -40%;
+    margin-left: 36%;
+    font-size: 20px;
+  } 
+}
+
