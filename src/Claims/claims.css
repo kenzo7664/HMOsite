@@ -1,0 +1,41 @@
+body {
+}
+
+h2 {
+  color: black;
+}
+
+.claims-wrapper {
+  background: #fff;
+  width: 70%;
+  margin: auto;
+}
+
+.claims-content {
+  margin: auto;
+  width: 70%;
+  height: 100vh;
+  border: 2px solid lightgreen;
+}
+.heading {
+  padding-bottom: 20px;
+}
+
+.search-claims {
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 55%;
+  border: 1px solid lightgreen;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+input {
+  width: 170px;
+}
+
+.btn1 {
+  border-radius: 10px;
+  width: 35%;
+}
