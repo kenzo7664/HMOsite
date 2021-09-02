@@ -1,0 +1,60 @@
+.details{
+ border: 1px solid lightslategray;
+ margin: 2%;
+}
+
+.code-name{
+ display: flex;
+ justify-content: space-around;
+ padding: 2%;
+}
+
+.code{
+ width: 46%;
+ max-height: 4vh;
+}
+
+.Name-input{
+ width: 30%;
+ max-height: 4vh;
+}
+
+.Company{
+ display: flex;
+ justify-content: space-between;
+ padding: 2%;
+ 
+}
+
+.comp{
+ max-height: 4vh;
+ width: 60%;
+}
+
+.age-date{
+ display: flex;
+ justify-content: space-between;
+ padding: 2%;
+}
+
+.age{
+ max-height: 4vh;
+ width: 2vw;
+}
+
+.date{
+ max-height: 4vh;
+ width: 40%;
+}
+
+.status{
+ display: flex;
+ justify-content: space-between;
+ padding: 2%;
+}
+
+.stat{
+ max-height: 4vh;
+ width: 90%;
+}
+

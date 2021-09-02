@@ -8,34 +8,96 @@ h2 {
 .claims-wrapper {
   background: #fff;
   width: 70%;
+  height: auto;
   margin: auto;
 }
 
 .claims-content {
   margin: auto;
-  width: 70%;
-  height: 100vh;
-  border: 2px solid lightgreen;
+  width: 50vw;
+  height: auto;
+  border: 2px solid lightslategray;
+  
 }
 .heading {
   padding-bottom: 20px;
 }
 
 .search-claims {
-  margin-top: 10px;
-  margin-right: 10px;
-  margin-left: 55%;
-  border: 1px solid lightgreen;
+ margin-top: 10px;
+ margin-left: 55%;
+ border: 1px solid lightslategray;
+ display: flex;
+ justify-content: space-between;
+ padding: 5px;
+ width: 22vw;
+}
+
+.input {
+ max-width: 170px;
+ max-height: 5vh;
+ 
+  
+}
+
+.btnn1 {
+  max-width: 10vw;
+  max-height: 7vh;
+  background: lightslategray;
+}
+
+.get-form{
+ max-width: 100px;
+ max-height: 4vh;
+}
+
+.Get{
+  max-width: 10vw;
+  max-height: 4vh;
+  background: lightslategray;
+}
+
+select{
+ max-height: 4vh;
+}
+
+.radio{
+ width: 1vw;
+ height: 4vh;
+}
+
+.Provider-type{
+ display: flex;
+ justify-content: space-around;
+ padding-top: 3%;
+}
+
+.radio-inputs{
+  border: 1px solid lightslategray;
+ display: flex;
+ justify-content: space-between;
+ max-width: 18vw;
+ padding: 1px;
+ max-height: 4vh;
+}
+
+.provider{
+  border: 1px solid lightslategray;
   display: flex;
   justify-content: space-between;
+  margin: 2%;
   padding: 5px;
 }
 
-input {
-  width: 170px;
+.prov{
+ max-height: 4vh;
+ width: 34vw;
 }
 
-.btn1 {
-  border-radius: 10px;
-  width: 35%;
+.enrolee{
+ border: 1px solid lightslategray;
+  display: flex;
+  justify-content: space-between;
+  margin: 2%;
+  padding: 5px;
 }

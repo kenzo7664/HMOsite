@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import Modal from './modal/Modal'
 import medi from "./medicalimg.jpg";
 import "./login.css";
 
@@ -68,9 +68,7 @@ class Page extends Component {
             <input type='submit' className='btn1' value='Login' />
             <p className='desc'>
               Dont have an account yet ?
-              <a href='www' className='spn'>
-                Register Here
-              </a>
+              <Modal />
             </p>
           </form>
         </div>

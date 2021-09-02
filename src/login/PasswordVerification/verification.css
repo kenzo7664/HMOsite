@@ -1,0 +1,57 @@
+.forrm {
+  margin-top: 90px;
+  margin-left: 330px;
+  align-items: center;
+  padding: 20px;
+  width: 50vw;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control {
+  margin: 0.5rem 0;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  align-items: center;
+  position: relative;
+}
+
+.form-btn {
+  background-color: hsl(154, 59%, 51%);
+  width: 20%;
+  padding: 5px;
+  margin: 10px;
+  border-radius: 10px;
+  color: white;
+  
+}
+
+.eye-slash {
+  font-size: 20px;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+}
+
+small {
+  visibility: hidden;
+  color: black;
+  position: absolute;
+  top: -90px;
+  font-size: 20px;
+  left: 0px;
+}
+
+.form-control.error small {
+  visibility: visible;
+  color: #e74c3c;
+}
+
+.form-control.success small {
+  visibility: visible;
+  color: #2ecc71;
+}
+
+
+
