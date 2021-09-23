@@ -3,40 +3,40 @@ import Modal from './modal/Modal'
 import medi from "./medicalimg.jpg";
 import "./login.css";
 
-const formValid = (formErrors) => {
-  let valid = true;
+// const formValid = (formErrors) => {
+//   let valid = true;
 
-  Object.values(formErrors).forEach((val) => {
-    val.length > 0 && (valid = false);
-  });
-  return valid;
-};
+//   Object.values(formErrors).forEach((val) => {
+//     val.length > 0 && (valid = false);
+//   });
+//   return valid;
+// };
 class Page extends Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      email: null,
-      password: null,
-      formErrors: {
-        email: "",
-        password: "",
-      },
-    };
-  }
+  //   this.state = {
+  //     email: null,
+  //     password: null,
+  //     formErrors: {
+  //       email: "",
+  //       password: "",
+  //     },
+  //   };
+  // }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  // handleSubmit = (e) => {
+  //   e.preventDefault();
 
-    if (formValid(this.state.formErrors)) {
-      console.log(`
-       Email: ${this.state.email}
-       Password: ${this.state.password}
-     `);
-    } else {
-      console.error("form invalid -display error message");
-    }
-  };
+  //   if (formValid(this.state.formErrors)) {
+  //     console.log(`
+  //      Email: ${this.state.email}
+  //      Password: ${this.state.password}
+  //    `);
+  //   } else {
+  //     console.error("form invalid -display error message");
+  //   }
+  // };
 
   render() {
     return (
@@ -44,8 +44,8 @@ class Page extends Component {
         <Images />
         <div className='formm'>
           <form
-            onSubmit={this.handleSubmit}
-            action='https://www.youtube.com/results'
+            // onSubmit={this.handleSubmit}
+            // action='https://www.youtube.com/results'
           >
             <h2>Email</h2>
             <label htmlFor='email'></label>

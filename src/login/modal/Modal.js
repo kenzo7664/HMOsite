@@ -1,11 +1,46 @@
 import React, { useState } from "react";
 import "./modal.css";
 import * as FaIcons from "react-icons/fa";
+
+
 function Modal() {
+  const [emailAddress, setEmailAddress] = useState("")
   const [modal, setModal] = useState(false);
-  const toggleModal = () => {
+  const toggleModal = (e) => {
     setModal(!modal);
+    e.preventDefault()
+    
   };
+  async function sendInfo(e){
+     e.preventDefault()
+    let item = emailAddress.trim()
+    let gu = JSON.stringify(item)
+    console.log(gu);
+    
+    let result = await fetch("https://fierce-wave-48764.herokuapp.com/https://lifeworthhmo.herokuapp.com/api/Account/RequestToken",{
+     method:'POST',
+     headers:{
+       "Content-Type": "application/json",
+       "Accept": "application/json"
+     },
+     
+
+
+    })
+    
+    
+    const resultt = await result.json()
+    localStorage.setItem(JSON.stringify(resultt))
+
+
+    const infoEmail = (document.getElementById('email').value)
+    // console.log(infoEmail);
+    if(infoEmail === ""){
+     e.preventDefault()
+    }else{
+      e.preventDefault()
+    }
+  }
 
   return (
     <>
@@ -18,12 +53,12 @@ function Modal() {
           <div className='overlay' onClick={toggleModal}></div>
           <div className='modal-content'>
             <label>Input Email address to Receive Password Link </label>
-            <input type='text' />
+            <input type="email" id="email" onChange = {(e)=> setEmailAddress(e.target.value)} />
             {/* <button className='close-modal' onClick={toggleModal}>
               Close
             </button> */}
-            <button onClick={toggleModal} className ="snd">
-              Send <FaIcons.FaLocationArrow />
+            <button onClick={sendInfo} className ="snd" >
+               Send <FaIcons.FaLocationArrow /> 
             </button>
           </div>
         </div>
