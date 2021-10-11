@@ -16,7 +16,7 @@ function Verification() {
     const passwordValue = passWord1.value.trim();
     const password2Value = passWord2.value.trim();
 
-    if (passwordValue == "") {
+    if (passwordValue === "") {
       setErrorFor(passWord2, "Fields can't be empty");
     } else {
       setSuccessFor(passWord2, "Successful");
