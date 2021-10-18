@@ -13,24 +13,25 @@ function Modal() {
   };
   async function sendInfo(e){
      e.preventDefault()
-    let item = emailAddress.trim()
+     let item = {"emailAddress" : emailAddress.trim()}
     let gu = JSON.stringify(item)
     console.log(gu);
     
-    let result = await fetch("https://fierce-wave-48764.herokuapp.com/https://lifeworthhmo.herokuapp.com/api/Account/RequestToken",{
+    let result = await fetch("https://lifeworthhmo.herokuapp.com/api/Account/RequestToken",{
      method:'POST',
      headers:{
        "Content-Type": "application/json",
        "Accept": "application/json"
      },
+     body:gu
      
 
 
     })
     
-    
+    console.log(result);
     const resultt = await result.json()
-    localStorage.setItem(JSON.stringify(resultt))
+   
 
 
     const infoEmail = (document.getElementById('email').value)
