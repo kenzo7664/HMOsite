@@ -1,17 +1,41 @@
-import React from 'react'
+import React, { Component } from "react";
+import { Redirect } from 'react-router-dom';
 import "./welcom.css"
 import * as FaIcons from "react-icons/fa";
 
 
- function Welcomemessage () {
- 
- return (
-   <div className='welcome'>
-     <h1 className='welcome-text'>TOLU</h1>
-     <FaIcons.FaUserCircle className='icn' />
-     <FaIcons.FaUserCircle className='icon' />
-   </div>
- );
+
+class Welcomemessage extends Component{
+  
+  constructor(props){
+    super(props);
+    this.state ={
+      redirect:false
+    }
+  }
+
+  componentWillMount(){
+    if(sessionStorage.getItem("token")){
+       console.log("Call User Feed");
+    }
+    else{
+      this.setState({redirect:true})
+    }
+  }
+  render(){
+    if(this.state.redirect){
+      return(<Redirect to ={'/'} />)
+    }
+
+    if(sessionStorage.getItem("token"))
+
+    return (
+      
+      <div className='welcome'>
+        <button type="button" className="logout" >LOG OUT</button>
+      </div>
+    );
+  }
  }
 
 

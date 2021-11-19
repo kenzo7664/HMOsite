@@ -3,6 +3,7 @@ import "./modal.css";
 import * as FaIcons from "react-icons/fa";
 
 
+
 function Modal() {
   const [emailAddress, setEmailAddress] = useState("")
   const [modal, setModal] = useState(false);
@@ -30,7 +31,7 @@ function Modal() {
     })
     
     console.log(result);
-    const resultt = await result.json()
+    
    
 
 
@@ -48,6 +49,7 @@ function Modal() {
       <button onClick={toggleModal} className='spn'>
         Set password
       </button>
+      
 
       {modal && (
         <div className='modal'>
@@ -58,6 +60,7 @@ function Modal() {
             {/* <button className='close-modal' onClick={toggleModal}>
               Close
             </button> */}
+          
             <button onClick={sendInfo} className ="snd" >
                Send <FaIcons.FaLocationArrow /> 
             </button>

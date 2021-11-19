@@ -8,14 +8,15 @@ function Main() {
   return (
     <>
       <div>
-        <h1 className = "msg">WELCOME</h1>
+        <h1 className = "msg">WELCOME  TOLU </h1>
+        
       </div>
       <div className='mainwrapper'>
         <div className='sub-mainwrapper1'>
           <div className='wrapper1'>
             <div className='sub-wrapper1'>
               <a href='https://www.youtube.com' className='itenary'>
-                Clients
+               Total Number of Submitted Claims
               </a>
               <br />
               <Image />
@@ -25,7 +26,7 @@ function Main() {
           <div className='wrapper1'>
             <div className='sub-wrapper1'>
               <a href='https://www.youtube.com' className='itenary'>
-                Principals
+                Total Number of Principals
               </a>
               <br />
               <Image />
@@ -42,22 +43,13 @@ function Main() {
             </div>
             <h3 className='item-quantity'>2</h3>
           </div>
-          <div className='wrapper1'>
-            <div className='sub-wrapper1'>
-              <a href='https://www.youtube.com' className='itenary'>
-                Capitations
-              </a>
-              <br />
-              <Image />
-            </div>
-            <h3 className='item-quantity'>0</h3>
-          </div>
+          
         </div>
         <div className='sub-mainwrapper2'>
           <div className='wrapper2'>
             <div className='sub-wrapper2'>
               <a href='https://www.youtube.com' className='itenary'>
-                Providers
+                Claims not vetted
               </a>
               <br />
               <Imagee />
@@ -67,7 +59,7 @@ function Main() {
           <div className='wrapper2'>
             <div className='sub-wrapper2'>
               <a href='https://www.youtube.com' className='itenary'>
-                ID cards
+                Total Number of Dependants
               </a>
               <br />
               <Image2 />
@@ -77,23 +69,14 @@ function Main() {
           <div className='wrapper2'>
             <div className='sub-wrapper2'>
               <a href='https://www.youtube.com' className='itenary'>
-                Authorizations
+                Search Enrollee
               </a>
               <br />
               <Image3 />
             </div>
             <h3 className='item-quantity'>18</h3>
           </div>
-          <div className='wrapper2'>
-            <div className='sub-wrapper2'>
-              <a href='https://www.youtube.com' className='itenary'>
-                Errors
-              </a>
-              <br />
-              <Imagee />
-            </div>
-            <h3 className='item-quantity'>0</h3>
-          </div>
+          
         </div>
       </div>
     </>

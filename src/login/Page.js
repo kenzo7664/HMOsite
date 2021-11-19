@@ -1,71 +1,82 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
+import {PostData} from '../../src/services/PostData'
+import { Redirect } from "react-router-dom";
 import Modal from './modal/Modal'
 import medi from "./medicalimg.jpg";
 import "./login.css";
 
-// const formValid = (formErrors) => {
-//   let valid = true;
+class Page extends Component{
+   constructor(props){
+     super(props);
+     this.state = {
+       emailAddress : "",
+       password:"",
+       redirect: false
+     }
+     this.Login = this.Login.bind(this);
+     this.onChange = this.onChange.bind(this);
+   }
+   Login(e){
+     e.preventDefault()
+     if(this.state.emailAddress && this.state.password){
+      PostData('Login', this.state).then((result)=>{
+        let responseJSON = result
+        console.log(responseJSON);
+        if(responseJSON.details){
+           sessionStorage.setItem('token',responseJSON.token)
+           this.setState({redirect:true})
+        }
+        else{
+          console.log("login error");
+        }
+      })
+     }
+     
+   }
 
-//   Object.values(formErrors).forEach((val) => {
-//     val.length > 0 && (valid = false);
-//   });
-//   return valid;
-// };
-class Page extends Component {
-  // constructor(props) {
-  //   super(props);
+  
 
-  //   this.state = {
-  //     email: null,
-  //     password: null,
-  //     formErrors: {
-  //       email: "",
-  //       password: "",
-  //     },
-  //   };
-  // }
-
-  // handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   if (formValid(this.state.formErrors)) {
-  //     console.log(`
-  //      Email: ${this.state.email}
-  //      Password: ${this.state.password}
-  //    `);
-  //   } else {
-  //     console.error("form invalid -display error message");
-  //   }
-  // };
-
-  render() {
+   onChange(e){
+      this.setState({[e.target.name]: e.target.value})
+      console.log(this.state);
+   }
+  
+  
+  render(){ 
+    if(this.state.redirect){
+      return(<Redirect to ={'/dash'} />)
+    }
     return (
       <section className='form'>
         <Images />
         <div className='formm'>
           <form
-            // onSubmit={this.handleSubmit}
-            // action='https://www.youtube.com/results'
+            
           >
             <h2>Email</h2>
             <label htmlFor='email'></label>
             <input
               type='email'
+              name="emailAddress"
               placeholder='Email'
               className=''
-              onChange={this.handleChange}
+              onChange ={this.onChange}
+              
             />
             <h2>PASSWORD</h2>
             <label htmlFor='password'></label>
             <input
               type='password'
               placeholder='Password'
+              name = "password"
               className=''
-              onChange={this.handleChange}
+              onChange ={this.onChange}
+             
+              
             />
-            <input type='checkbox' className='chk' />
-            <h3 className='reme'>Remember me</h3>
-            <input type='submit' className='btn1' value='Login' />
+            
+
+            <button type='submit' className='btn1' onClick={this.Login}  >Login</button>
             <p className='desc'>
               Dont have an account yet ?
               <Modal />
@@ -74,7 +85,7 @@ class Page extends Component {
         </div>
       </section>
     );
-  }
+    }
 }
 const Images = () => {
   return <img src={medi} alt='' className='img' />;

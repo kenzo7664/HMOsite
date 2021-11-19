@@ -8,6 +8,13 @@ function Medicals() {
     clone.id = "elem2";
     bu.after(clone);
   };
+  const removeClick = () =>{
+    var bu = document.querySelector(".medicals");
+    var clone = bu.cloneNode(true);
+    clone.id = "elem3";
+    bu.remove(clone.id);
+    
+  }
   return (
     <>
       <div className='Medicals'>
@@ -40,6 +47,9 @@ function Medicals() {
         <div>
           <button type='button' className='btnn1' onClick = {handleClick}>
             Add Field
+          </button>
+          <button type='button' className='btnn1' onClick = {removeClick}>
+            Remove Field
           </button>
           <div>
             <button type='button' id='btnn1'>

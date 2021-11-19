@@ -4,7 +4,16 @@
  
   
 }
-
+.logout{
+  background-color: royalblue;
+  color: white;
+  font-size: 20px;
+  margin-top: 10%;
+  width: 100%;
+  margin-left: 200%;
+  
+}
+/* 
 .icn {
     font-size: 30px;
     margin-left: 30%;
@@ -13,7 +22,7 @@
 
 .icon{
   display: none;
-}
+} */
 @media screen and (max-width:400px) {
   .welcome-text {
     margin-left: -78%;
