@@ -1,0 +1,34 @@
+.dependant{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+    
+   }
+   
+   .radio-input{
+    
+    display: flex;
+    justify-content: space-between;
+    max-width: 18vw;
+    padding: 1px;
+    max-height: 4vh;
+   }
+   .enrole{
+       position: relative;
+       height: auto;
+   }
+   
+   .search{
+       background-color: lightslategray;
+       color: white;
+       border-radius: 5px;
+       font-size: 20px;
+       padding: 5px;
+       cursor: pointer;
+       position: absolute;
+       top: -23%;
+       right: 0%;
+
+       
+      
+    }

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./modal.css";
 import * as FaIcons from "react-icons/fa";
-
+import { Link } from 'react-router-dom';
+import {useHistory} from "react-router-dom"
 
 
 function Modal() {
@@ -12,8 +13,10 @@ function Modal() {
     e.preventDefault()
     
   };
+  let history = useHistory()
   async function sendInfo(e){
      e.preventDefault()
+     history.push("/verification")
      let item = {"emailAddress" : emailAddress.trim()}
     let gu = JSON.stringify(item)
     console.log(gu);
@@ -35,13 +38,13 @@ function Modal() {
    
 
 
-    const infoEmail = (document.getElementById('email').value)
-    // console.log(infoEmail);
-    if(infoEmail === ""){
-     e.preventDefault()
-    }else{
-      e.preventDefault()
-    }
+    // const infoEmail = (document.getElementById('email').value)
+    // // console.log(infoEmail);
+    // if(infoEmail === ""){
+    //  e.preventDefault()
+    // }else{
+    //   e.preventDefault()
+    // }
   }
 
   return (
@@ -60,10 +63,11 @@ function Modal() {
             {/* <button className='close-modal' onClick={toggleModal}>
               Close
             </button> */}
-          
-            <button onClick={sendInfo} className ="snd" >
-               Send <FaIcons.FaLocationArrow /> 
-            </button>
+            
+              <button onClick={sendInfo} className ="snd" >
+                Send <FaIcons.FaLocationArrow /> 
+              </button>
+            
           </div>
         </div>
       )}

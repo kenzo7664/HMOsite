@@ -12,6 +12,7 @@ class Welcomemessage extends Component{
     this.state ={
       redirect:false
     }
+    this.logout = this.logout.bind(this)
   }
 
   componentWillMount(){
@@ -22,6 +23,13 @@ class Welcomemessage extends Component{
       this.setState({redirect:true})
     }
   }
+   
+  logout(){
+    sessionStorage.setItem("token", " ")
+    sessionStorage.clear()
+    this.setState({redirect:true})
+  }
+
   render(){
     if(this.state.redirect){
       return(<Redirect to ={'/'} />)
@@ -32,7 +40,7 @@ class Welcomemessage extends Component{
     return (
       
       <div className='welcome'>
-        <button type="button" className="logout" >LOG OUT</button>
+        <button type="button" className="logout" onClick={this.logout} >LOG OUT{}</button>
       </div>
     );
   }

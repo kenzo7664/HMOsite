@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./verification.css";
 import * as FaIcons from "react-icons/fa";
+import {useHistory} from "react-router-dom"
 
 function Verification() {
   
@@ -12,6 +13,7 @@ function Verification() {
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
+  let history = useHistory()
   // const passWord1 = document.getElementById("email");
   // const passWord2 = document.getElementById("password");
   // const passWord3 = document.getElementById("confirmPassword")
@@ -124,6 +126,7 @@ function Verification() {
     checkInputs();
     
     resetPassword()
+    history.push("/")
     
     
 

@@ -1,14 +1,83 @@
-import React from "react";
+import{ React,useState,useEffect} from "react";
+import {PostData} from '../../src/services/PostData'
+import { Link } from 'react-router-dom';
 import "./main.css";
 import note from "./notes.png";
 import Id from "./id-card.png";
-import poetry from "./poetry.png";
+import search from "./search.png";
 import claims from "./refund.png";
+
+
+
 function Main() {
+  const [error, setError]=useState(null)
+  const [data, setData]=useState("")
+  const [principal,setPrincipal] = useState('')
+  const [dependant,setDependant] = useState('')
+  const Info = sessionStorage.getItem('providername')
+  const Id = sessionStorage.getItem('id')
+
+ 
+
+  useEffect(()=>{
+    let ap = `https://lifeworthhmo.herokuapp.com/api/Provider/TotalClaimsSubmitted/` + `${Id}`
+    fetch (`${ap}`)
+    .then(response =>{
+      if(response.ok){
+        return response.json()
+      }
+      throw response
+    })
+    .then(data => {
+      setData(data)
+      console.log(data)
+    })
+    .catch(error =>{
+      console.error("Error fetching data:",error)
+      setError(error)
+    })
+  },[])
+
+  useEffect(()=>{
+    let ap = `https://lifeworthhmo.herokuapp.com/api/Provider/TotalPrincipal/` + `${Id}`
+    fetch (`${ap}`)
+    .then(response =>{
+      if(response.ok){
+        return response.json()
+      }
+      throw response
+    })
+    .then(principal => {
+      setPrincipal(principal)
+      console.log(principal)
+    })
+    .catch(error =>{
+      console.error("Error fetching data:",error)
+      setError(error)
+    })
+  },[])
+  useEffect(()=>{
+    let ap = `https://lifeworthhmo.herokuapp.com/api/Provider/TotalDependant/` + `${Id}`
+    fetch (`${ap}`)
+    .then(response =>{
+      if(response.ok){
+        return response.json()
+      }
+      throw response
+    })
+    .then(dependant => {
+      setDependant(dependant)
+      console.log(dependant)
+    })
+    .catch(error =>{
+      console.error("Error fetching data:",error)
+      setError(error)
+    })
+  },[])
   return (
     <>
       <div>
-        <h1 className = "msg">WELCOME  TOLU </h1>
+        <h1 className = "msg">WELCOME {Info} </h1>
         
       </div>
       <div className='mainwrapper'>
@@ -21,7 +90,7 @@ function Main() {
               <br />
               <Image />
             </div>
-            <h3 className='item-quantity'>15</h3>
+            <h3 className='item-quantity'>{data.totalCount}</h3>
           </div>
           <div className='wrapper1'>
             <div className='sub-wrapper1'>
@@ -31,18 +100,20 @@ function Main() {
               <br />
               <Image />
             </div>
-            <h3 className='item-quantity'>1105</h3>
+            <h3 className='item-quantity'>{principal.totalCount}</h3>
           </div>
-          <div className='wrapper1'>
+          <Link to = "/claims">
+          <div className='wrapper1' href ="/claims" >
             <div className='sub-wrapper1'>
-              <a href='https://www.youtube.com' className='itenary'>
+              <a href='' className='itenary'>
                 Claims
               </a>
               <br />
               <Image4 />
             </div>
-            <h3 className='item-quantity'>2</h3>
+            
           </div>
+          </Link>
           
         </div>
         <div className='sub-mainwrapper2'>
@@ -64,8 +135,9 @@ function Main() {
               <br />
               <Image2 />
             </div>
-            <h3 className='item-quantity'>3</h3>
+            <h3 className='item-quantity'>{dependant.totalCount}</h3>
           </div>
+          <Link to ="/SearchEnrollee">
           <div className='wrapper2'>
             <div className='sub-wrapper2'>
               <a href='https://www.youtube.com' className='itenary'>
@@ -74,8 +146,9 @@ function Main() {
               <br />
               <Image3 />
             </div>
-            <h3 className='item-quantity'>18</h3>
+            
           </div>
+          </Link>
           
         </div>
       </div>
@@ -96,7 +169,7 @@ const Image2 = () => {
 };
 
 const Image3 = () => {
-  return <img src={poetry} alt='' className='img5' />;
+  return <img src={search} alt='' className='img5' />;
 };
 
 const Image4 = () => {

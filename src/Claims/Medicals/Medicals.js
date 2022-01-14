@@ -31,9 +31,11 @@ function Medicals() {
               </select>
             </div>
             <div className='approved'>
-              <label htmlFor=''>Charges Approved</label>
+              <label htmlFor=''>Unit:</label>
               <input type='text' className='charges-approved' />
-              <label htmlFor=''>Amount Sent</label>
+              <label htmlFor=''>Unit Price:</label>
+              <input type='text' className='charges-approved' />
+              <label htmlFor=''>Total Amount:</label>
               <input type='text' className='charges-approved' />
             </div>
             <div className='comment'>

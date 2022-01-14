@@ -63,7 +63,7 @@ select{
 
 .radio{
  width: 1vw;
- height: 4vh;
+ height:3vh;
 }
 
 .Provider-type{
@@ -76,9 +76,9 @@ select{
   border: 1px solid lightslategray;
  display: flex;
  justify-content: space-between;
- max-width: 18vw;
+ width: 30%;
  padding: 1px;
- max-height: 4vh;
+ max-height: 6vh;
 }
 
 .provider{
