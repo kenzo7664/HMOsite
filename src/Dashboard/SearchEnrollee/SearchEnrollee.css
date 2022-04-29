@@ -16,6 +16,7 @@
    .enrole{
        position: relative;
        height: auto;
+       padding-top: 40px;
    }
    
    .search{
@@ -26,9 +27,18 @@
        padding: 5px;
        cursor: pointer;
        position: absolute;
-       top: -23%;
+       top: 0%;
        right: 0%;
 
        
       
     }
+    .claims-contentt {
+  margin: auto;
+  width: 50vw;
+  height: auto;
+  padding: 15px;
+  border-radius: 30px;
+  border: 2px solid lightslategray;
+  
+}

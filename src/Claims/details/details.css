@@ -15,7 +15,7 @@
 }
 
 .Name-input{
- width: 30%;
+ width: 40%;
  max-height: 4vh;
 }
 
@@ -28,7 +28,7 @@
 
 .comp{
  max-height: 4vh;
- width: 60%;
+ margin-left: 10px;
 }
 
 .age-date{
@@ -39,7 +39,7 @@
 
 .age{
  max-height: 4vh;
- width: 2vw;
+ margin-left: 10px;
 }
 
 .date{
@@ -55,6 +55,6 @@
 
 .stat{
  max-height: 4vh;
- width: 90%;
+ margin-left: 12px;
 }
 

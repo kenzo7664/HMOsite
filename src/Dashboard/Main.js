@@ -36,11 +36,8 @@ function Main() {
       console.error("Error fetching data:",error)
       setError(error)
     })
-  },[])
-
-  useEffect(()=>{
-    let ap = `https://lifeworthhmo.herokuapp.com/api/Provider/TotalPrincipal/` + `${Id}`
-    fetch (`${ap}`)
+    let api = `https://lifeworthhmo.herokuapp.com/api/Provider/TotalPrincipal/` + `${Id}`
+    fetch (`${api}`)
     .then(response =>{
       if(response.ok){
         return response.json()
@@ -55,10 +52,8 @@ function Main() {
       console.error("Error fetching data:",error)
       setError(error)
     })
-  },[])
-  useEffect(()=>{
-    let ap = `https://lifeworthhmo.herokuapp.com/api/Provider/TotalDependant/` + `${Id}`
-    fetch (`${ap}`)
+    let td = `https://lifeworthhmo.herokuapp.com/api/Provider/TotalDependant/` + `${Id}`
+    fetch (`${td}`)
     .then(response =>{
       if(response.ok){
         return response.json()
@@ -84,7 +79,7 @@ function Main() {
         <div className='sub-mainwrapper1'>
           <div className='wrapper1'>
             <div className='sub-wrapper1'>
-              <a href='https://www.youtube.com' className='itenary'>
+              <a href='#' className='itenary'>
                Total Number of Submitted Claims
               </a>
               <br />

@@ -2,46 +2,42 @@ import React, { Component } from 'react'
 import "./Table.css";
 
 
-class Table extends Component {
-    constructor(props) {
-       super(props) 
-       this.state = { //state is by default an object
-          students: [
-             { id: 1, name: 'Wasif', age: 21, email: 'wasif@email.com' },
-             { id: 2, name: 'Ali', age: 19, email: 'ali@email.com' },
-             { id: 3, name: 'Saad', age: 16, email: 'saad@email.com' },
-             { id: 4, name: 'Asad', age: 25, email: 'asad@email.com' }
-          ]
-       }
-    }
- 
-    renderTableData() {
-        return this.state.students.map((student, index) => {
-           const { id, name, age, email } = student //destructuring
-           return (
-              <tr key={id}>
-                 <td>{id}</td>
-                 <td>{name}</td>
-                 <td>{age}</td>
-                 <td>{email}</td>
-              </tr>
-           )
-        })
-     }
-    
-     render() {
-        return (
-           <div>
-              
-              <table id='students'>
-                 <tbody>
-                    {this.renderTableData()}
-                 </tbody>
-              </table>
-           </div>
-        )
-     }
- }
- 
- export default Table 
+function Table({apiData , searchInput,  searchEmployee}){
+  
+return (
+  <>
+  {searchInput.length >= 2 || searchEmployee ? apiData.map((name,index) =>{
+   return (
+      <>
+   <table>
+   <thead>
+    <tr key = {index}>
+      <th>Surname</th>
+      <th>FullName</th>
+      <th>EmployeeNo.</th>
+      <th>Id Policy</th>
+      <th>Email</th>
+      <th>Phone Number</th>
+    </tr>
+  </thead>
+  <tbody className='size'>
+    <tr >
+      <td>{name.surname}</td>
+      <td >{name.fullName || name.name}</td>
+      <td>{name.employeeNo}</td>
+      <td>{name.currentIdPolicy}</td>
+      <td>{name.email}</td>
+       <td>{name.phoneNo}</td>
+      
+    </tr>
+    </tbody>
+    </table>
+    </>
+   )
+}) : ""}
+  </>
+)
+}
+
+export default Table
  

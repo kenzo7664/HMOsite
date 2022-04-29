@@ -10,6 +10,8 @@ h2 {
   width: 70%;
   height: auto;
   margin: auto;
+  padding: 15px;
+  border-radius: 30px;
 }
 
 .claims-content {
@@ -17,6 +19,8 @@ h2 {
   width: 50vw;
   height: auto;
   border: 2px solid lightslategray;
+  padding: 15px;
+  border-radius: 30px;
   
 }
 .heading {

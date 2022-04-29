@@ -83,7 +83,7 @@ class Page extends Component{
        
         <Images />
         <div className='formm'>
-          {this.state.post ? <RingLoader></RingLoader>: ""}
+          {this.state.post ? <RingLoader></RingLoader>:`` }
           <form>
             <span className="er">{this.state.error} </span>
             
