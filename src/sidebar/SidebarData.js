@@ -27,40 +27,5 @@ export const SidebarData = [
     icon: <FaIcons.FaRegBell />,
     cName: "nav-text",
   },
-  // {
-  //   title: "Levels",
-  //   path: "/Levels",
-  //   icon: <FaIcons.FaRegBell />,
-  //   cName: "nav-text",
-  // },
-  // {
-  //   title: "ID card",
-  //   path: "/ID cards",
-  //   icon: <AiIcons.AiOutlineIdcard />,
-  //   cName: "nav-text",
-  // },
-  // {
-  //   title: "Claims",
-  //   path: "/Claims",
-  //   icon: <FaIcons.FaRegBell />,
-  //   cName: "nav-text",
-  // },
-  // {
-  //   title: "Principals",
-  //   path: "/Principals",
-  //   icon: <FaIcons.FaRegBell />,
-  //   cName: "nav-text",
-  // },
-  // {
-  //   title: "Authorization",
-  //   path: "/Authorizations",
-  //   icon: <FaIcons.FaRegBell />,
-  //   cName: "nav-text",
-  // },
-  // {
-  //   title: "Capitations",
-  //   path: "/Capitations",
-  //   icon: <FaIcons.FaRegBell />,
-  //   cName: "nav-text",
-  // },
+
 ];

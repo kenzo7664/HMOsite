@@ -27,7 +27,7 @@ class Page extends Component{
      this.setState({post:true});
      this.state.post = setTimeout(() => {
        this.setState({post:false})
-     }, 2000);
+     }, 18000);
      e.preventDefault()
      if(this.state.emailAddress && this.state.password){
       PostData('Login', this.state).then((result)=>{

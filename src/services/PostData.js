@@ -1,9 +1,12 @@
 export function PostData(type, userData){
-
+    let online = navigator.onLine? "online" :'offline'
+    console.log(
+      online
+    );
     let BaseUrl = "https://lifeworthhmo.herokuapp.com/api/"
 
     return new Promise((resolve,reject)=>{
-       
+       if(online === "online"){
         fetch(BaseUrl+type,{
             method:'POST',
             headers:{
@@ -19,6 +22,9 @@ export function PostData(type, userData){
         .catch((error) => {
           reject(error)
         });
+      } else {
+        alert("You are Disconnected From The Internet")
+      }
 
     })
 }

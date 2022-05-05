@@ -24,7 +24,18 @@ function Claims() {
   const [type,  setType] = useState("")
   const [proType, setProType] = useState('str')
   const [dates, setDates] = useState("")
+  const [day,setDay] = useState(0)
+  const [month,setMonth] = useState(0)
+  const [year,setYear] = useState(0)
   let navigate = useHistory();
+  
+  
+  const providerId = Number( sessionStorage.getItem("id"))
+  console.log((providerId));
+  let claims =[] 
+  const [claim, setClaim] = useState([])
+ 
+  
  
    const searchItems = (searchValue) => {
     setSearchInput(searchValue)
@@ -131,29 +142,69 @@ function Claims() {
   }
 
   const getDate = (e) =>{
-    console.log(e.target.value);
-    setDates(e.target.value)
-  
-    
-    console.log(dates);
+
+    if(e.target.value !== ""){
+     const dateConvert = e.target.value
+     const dateStr = new Date (dateConvert)
+     const iso = dateStr.toISOString()
+     const day = dateStr.getDate()
+     const month = dateStr.getMonth() + 1
+     const year = dateStr.getFullYear()
+     console.log(day,month, year);
+     setDay(day)
+     setMonth(month)
+     setYear(year)
+     
+     setDates(iso)
+     console.log(dates);
+    }
 
   }
+  const backClick = () =>{
+    navigate.push("./dash")
+  }
+
+
   
-  
-  const defaultValues = {"chargesApproved":amountCalc , "idProvider":option.idProvider,"type":type, "protype":proType}
+  const defaultValues = {"chargesApproved":amountCalc , "idProvider":option.idProvider,"type":type, "protype":proType,"TreatmentDate":dates,"Day":day,"Month":month,"Year":year}
   const { register, handleSubmit , reset } = useForm({defaultValues});
- const onSubmit = (data) => {
-    data.type = type
-    data.chargesApproved = amountCalc
-    data.idProvider = option.idProvider
-    data.employeeNo = option.employeeNo
-    data.employeeName = option.fullName || option.name
-    data.employeeSurname = option.surname
-    let claims =[] 
-    claims.push(data)
-    console.log(
-      claims
-    )
+ 
+    const addUp = (data) =>{
+      data.type = type
+      data.chargesApproved = amountCalc
+      data.idProvider = providerId
+      data.employeeNo = option.employeeNo
+      data.employeeName = option.fullName || option.name
+      data.employeeSurname = option.surname
+      data.consultancyDate = dates
+      data.TreatmentDate = dates
+      data.Day = day
+      data.Month = month
+      data.year = year
+       console.log(data);
+       claims.push(data)
+       console.log(claims);
+       console.log(claims.length);
+       if (claims.length >= 0){
+         onSubmit()
+       }
+        setApiDataMedical(null)
+        setAmountCalc('')
+        setOptions("")
+        reset()
+      
+       
+    }
+    const onSubmit = () => {
+     console.log(claims);
+    
+    
+   
+    
+    setApiDataMedical(null)
+    setAmountCalc('')
+    setOptions("")
+    
     axios
         .post(
             'https://lifeworthhmo.herokuapp.com/api/Claims',
@@ -167,14 +218,16 @@ function Claims() {
         .catch(error => {console.log(error.data)});
         
     };
+  
   return (
     <>
       <section className='claims-wrapper'>
         <div className='heading'>
           <h1>Input Claims</h1>
+          <button onClick={backClick} className="bck" >Back to Dashboard</button>
         </div>
-         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className='claims-content'>
+         <form onSubmit={handleSubmit(addUp)}>
+          <div className=''>
              <div className=''>
                 <label htmlFor=''>EnroleeNumber:</label> 
                <DebounceInput minLength={2}
@@ -244,19 +297,19 @@ function Claims() {
           </div>
           <div className='detailS'>
             <label htmlFor='diagnosis'>Details</label>
-            <input type='text' className='get-form' {...register("details")} />
+            <input type='text' className='' {...register("details")} />
           </div>
          
           
           <div className='ICD-code'>
             <label htmlFor='diagnosis' >ICD Code</label>
-            <input type='text' className='get-form' value={diagnosisCode}    />
+            <input type='text' className='' value={diagnosisCode}    />
           </div>
           
           
           <div className='Consultation-date'>
             <label htmlFor='diagnosis'>Consultation Date</label>
-            <input type='date' className='get-date' onClick={getDate}  {...register("consultancyDate")} />
+            <input type='date' className='' onClick={(e)=>getDate(e)}  {...register("consultancyDate")} />
           </div>
         </div>
       </div>
@@ -287,7 +340,7 @@ function Claims() {
             </div>
             <div className="amount">
               <label htmlFor=''>Charges Approved:</label>
-              <input type='number' className='charges-approved' id="approved-charges" {...register("chargesApproved")} value={amountCalc}    disabled/>
+              <input type='number' className='charges' id="approved-charges" {...register("chargesApproved")} value={amountCalc}    disabled/>
             </div>
             <div className='comment'>
               <label htmlFor=''>Amount Sent</label>
@@ -297,18 +350,11 @@ function Claims() {
             </div>
           </div>
         </div>
-        {/* <div>
-          <button type='button' className='btnn1' onClick = {handleClick}>
-            Add Field
-          </button>
-          <button type='button' className='btnn1' onClick = {removeClick}>
-            Remove Field
-          </button>
-         
-        </div> */}
+        
       </div>
+      <button type='submit' className='btnn1'>Submit</button>
           </div>
-           <input type="submit" />
+          
         </form>
       </section>
     </>

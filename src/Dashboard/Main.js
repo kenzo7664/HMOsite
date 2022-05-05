@@ -71,11 +71,12 @@ function Main() {
   },[])
   return (
     <>
-      <div>
-        <h1 className = "msg">WELCOME {Info} </h1>
+      
+       
         
-      </div>
       <div className='mainwrapper'>
+          <h1 className = "msg">WELCOME {Info} </h1>
+       <div className="mains">
         <div className='sub-mainwrapper1'>
           <div className='wrapper1'>
             <div className='sub-wrapper1'>
@@ -111,6 +112,7 @@ function Main() {
           </Link>
           
         </div>
+        
         <div className='sub-mainwrapper2'>
           <div className='wrapper2'>
             <div className='sub-wrapper2'>
@@ -145,6 +147,7 @@ function Main() {
           </div>
           </Link>
           
+        </div>
         </div>
       </div>
     </>

@@ -25,6 +25,8 @@ h2 {
 }
 .heading {
   padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .search-claims {
@@ -45,11 +47,15 @@ h2 {
 }
 
 .btnn1 {
-  max-width: 10vw;
-  max-height: 7vh;
-  background: lightslategray;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  background: white
 }
-
+.btnn1:hover{
+  cursor: pointer;
+  background: lightslategray
+}
 .get-form{
  max-width: 100px;
  max-height: 4vh;
@@ -104,4 +110,14 @@ select{
   justify-content: space-between;
   margin: 2%;
   padding: 5px;
+}
+
+.bck{
+  padding: 5px;
+  border-radius: 10px;
+  background: white
+}
+.bck:hover {
+  cursor: pointer;
+  background: lightslategray
 }

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
 import "./welcom.css"
 import * as FaIcons from "react-icons/fa";
+import * as AiIcons from "react-icons/ai";
 
 
 
@@ -39,9 +40,9 @@ class Welcomemessage extends Component{
 
     return (
       
-      <div className='welcome'>
-        <button type="button" className="logout" onClick={this.logout} >LOG OUT{}</button>
-      </div>
+      <>
+        <AiIcons.AiOutlineLogout className="logout" onClick={this.logout}/>
+      </>
     );
   }
  }

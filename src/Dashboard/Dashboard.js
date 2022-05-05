@@ -10,9 +10,9 @@ function Dashboard() {
         <Navbar />
       
 
-      <div className='main-dashboard'>
+      
         <Main />
-      </div>
+
 
      
         <Welcomemessage />

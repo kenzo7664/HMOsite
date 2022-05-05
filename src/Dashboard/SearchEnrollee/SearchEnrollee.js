@@ -3,11 +3,13 @@ import "./SearchEnrollee.css";
 import {DebounceInput} from 'react-debounce-input';
 import axios from 'axios';
 import Table from './Table';
+import { useHistory } from "react-router";
 
 function SearchEnrollee () {
   const [searchInput, setSearchInput] = useState({});
   const [searchEmployee, setSearchEmployee] = useState("")
   const[apiData,  setApiData] = useState([])
+  let navigate = useHistory();
   const searchItems = (searchValue) => {
     setSearchInput(searchValue)
       axios.get(`http://lifeworthhmo.herokuapp.com/api/Employee?FullName=${searchValue}`) 
@@ -38,7 +40,9 @@ function SearchEnrollee () {
      
     
   }
- 
+  const backClick = () =>{
+    navigate.push("./dash")
+  }
   
   useEffect(()=>{
     
@@ -50,8 +54,9 @@ function SearchEnrollee () {
         <section className='claims-wrapper'>
           <div className='heading'>
             <h1>Search Enrollee</h1>
+            <button onClick={backClick} className="bck" >Back to Dashboard</button>
           </div>
-          <div className='claims-contentt' id="enroleecontent">
+          <div className='' id="enroleecontent">
             
             
             <form className = "enrole">
