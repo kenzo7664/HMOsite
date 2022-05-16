@@ -3,7 +3,7 @@ export function PostData(type, userData){
     console.log(
       online
     );
-    let BaseUrl = "https://lifeworthhmo.herokuapp.com/api/"
+    let BaseUrl = "http://15.237.160.238:50/api/"
 
     return new Promise((resolve,reject)=>{
        if(online === "online"){
@@ -24,6 +24,7 @@ export function PostData(type, userData){
         });
       } else {
         alert("You are Disconnected From The Internet")
+        
       }
 
     })

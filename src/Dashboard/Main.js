@@ -9,6 +9,7 @@ import claims from "./refund.png";
 
 
 
+
 function Main() {
   const [error, setError]=useState(null)
   const [data, setData]=useState("")
@@ -20,7 +21,7 @@ function Main() {
  
 
   useEffect(()=>{
-    let ap = `https://lifeworthhmo.herokuapp.com/api/Provider/TotalClaimsSubmitted/` + `${Id}`
+    let ap = `http://15.237.160.238:50/api/Provider/TotalClaimsSubmitted/` + `${Id}`
     fetch (`${ap}`)
     .then(response =>{
       if(response.ok){
@@ -36,7 +37,7 @@ function Main() {
       console.error("Error fetching data:",error)
       setError(error)
     })
-    let api = `https://lifeworthhmo.herokuapp.com/api/Provider/TotalPrincipal/` + `${Id}`
+    let api = `http://15.237.160.238:50/api/Provider/TotalPrincipal/` + `${Id}`
     fetch (`${api}`)
     .then(response =>{
       if(response.ok){
@@ -52,7 +53,7 @@ function Main() {
       console.error("Error fetching data:",error)
       setError(error)
     })
-    let td = `https://lifeworthhmo.herokuapp.com/api/Provider/TotalDependant/` + `${Id}`
+    let td = `http://15.237.160.238:50/api/Provider/TotalDependant/` + `${Id}`
     fetch (`${td}`)
     .then(response =>{
       if(response.ok){
@@ -84,7 +85,7 @@ function Main() {
                Total Number of Submitted Claims
               </a>
               <br />
-              <Image />
+              <Image style  />
             </div>
             <h3 className='item-quantity'>{data.totalCount}</h3>
           </div>
@@ -114,16 +115,18 @@ function Main() {
         </div>
         
         <div className='sub-mainwrapper2'>
+          <Link to ='/List'>
           <div className='wrapper2'>
             <div className='sub-wrapper2'>
-              <a href='https://www.youtube.com' className='itenary'>
-                Claims not vetted
+              <a href='' className='itenary'>
+                List of Claims Submitted
               </a>
               <br />
               <Imagee />
             </div>
-            <h3 className='item-quantity'>312</h3>
+            
           </div>
+          </Link>
           <div className='wrapper2'>
             <div className='sub-wrapper2'>
               <a href='https://www.youtube.com' className='itenary'>

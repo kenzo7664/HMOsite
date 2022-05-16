@@ -22,8 +22,8 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
-    title: "Unvetted claims",
-    path: "/Plans",
+    title: "Submitted claims list",
+    path: "/List",
     icon: <FaIcons.FaRegBell />,
     cName: "nav-text",
   },

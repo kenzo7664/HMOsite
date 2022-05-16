@@ -199,7 +199,7 @@ function Verification() {
           </div>
 
           <button type='submit' onClick={handleSubmit} className='form-btn'>
-            Create Account
+            Create Password
           </button>
         </form>
       </article>

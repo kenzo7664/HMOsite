@@ -54,7 +54,8 @@ h2 {
 }
 .btnn1:hover{
   cursor: pointer;
-  background: lightslategray
+  background: #F8A370;
+  border-color: #F8A370;
 }
 .get-form{
  max-width: 100px;
@@ -119,5 +120,6 @@ select{
 }
 .bck:hover {
   cursor: pointer;
-  background: lightslategray
+  background: #F8A370;
+  border-color: #F8A370;
 }

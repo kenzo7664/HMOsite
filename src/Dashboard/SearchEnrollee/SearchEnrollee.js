@@ -12,7 +12,7 @@ function SearchEnrollee () {
   let navigate = useHistory();
   const searchItems = (searchValue) => {
     setSearchInput(searchValue)
-      axios.get(`http://lifeworthhmo.herokuapp.com/api/Employee?FullName=${searchValue}`) 
+      axios.get(`http://15.237.160.238:50/api/Employee?FullName=${searchValue}`) 
     .then((response) => {
       setApiData(response.data)
       console.log(response,searchValue);
@@ -22,13 +22,13 @@ function SearchEnrollee () {
   const searchEmployeeNumber = (searchId) => {
     setSearchEmployee(searchId)
     if(searchId.includes('~')){
-       axios.get(`https://lifeworthhmo.herokuapp.com/api/Dependant?DependantNumber=${searchId}`)
+       axios.get(`http://15.237.160.238:50/api/Dependant?DependantNumber=${searchId}`)
        .then((response)=>{
         setApiData(response.data)
        console.log(response ,searchId);
        })
     } else {
-       axios.get(`https://lifeworthhmo.herokuapp.com/api/Employee?EmployeeNumber=${searchId}`)
+       axios.get(`http://15.237.160.238:50/api/Employee?EmployeeNumber=${searchId}`)
        .then((response)=>{
         setApiData(response.data)
        console.log(response);

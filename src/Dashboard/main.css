@@ -1,6 +1,6 @@
 .mainwrapper {
  
-  padding-left: 5%;
+  padding-left: 7%;
  
 }
 .mains{
@@ -21,11 +21,11 @@
   -moz-box-shadow: -3px 5px 5px 4px rgba(167, 182, 171, 0.75);
 }
 
-.wrapper1:hover {
+/* .wrapper1:hover {
   background-color: #839ce6 ;
   cursor: pointer;
   transition: 0.7s ease-in-out;
-}
+} */
 
 .sub-wrapper1 {
   width: 46%;
@@ -35,12 +35,14 @@
   width: 51%;
   padding: 7%;
   opacity: 47%;
+ 
 }
 
 .img6 {
   width: 51%;
   padding: 7%;
   opacity: 47%;
+  
 }
 
 .itenary {
@@ -61,18 +63,21 @@
   width: 30%;
   padding: 4%;
   opacity: 47%;
+  
 }
 
 .img4 {
   width: 30%;
   padding: 4%;
   opacity: 47%;
+  
 }
 
 .img5 {
   width: 30%;
   padding: 4%;
   opacity: 47%;
+ 
 }
 
 .wrapper2 {
@@ -87,11 +92,11 @@
   -moz-box-shadow: -3px 5px 5px 4px rgba(167, 182, 171, 0.75);
 }
 
-.wrapper2:hover {
+/* .wrapper2:hover {
   background-color: #839ce6 ;
   cursor: pointer;
   transition: 0.7s ease-in-out;
-}
+} */
 
 .sub-wrapper2 {
   width: 78%;

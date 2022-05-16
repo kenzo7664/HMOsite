@@ -9,6 +9,7 @@ import {DebounceInput} from 'react-debounce-input';
 import '../Claims/authorization/authorization.css'
 import '../Claims/Medicals/medical.css'
 import '../Claims/details/details.css'
+import toast, { Toaster } from 'react-hot-toast';
 import { useHistory } from "react-router";
 
 
@@ -27,6 +28,7 @@ function Claims() {
   const [day,setDay] = useState(0)
   const [month,setMonth] = useState(0)
   const [year,setYear] = useState(0)
+  const [Refresh, setRefresh] = React.useState(false);
   let navigate = useHistory();
   
   
@@ -39,10 +41,19 @@ function Claims() {
  
    const searchItems = (searchValue) => {
     setSearchInput(searchValue)
-       axios.get(`http://lifeworthhmo.herokuapp.com/api/Employee?FullName=${searchValue}`)
+       axios.get(`http://15.237.160.238:50/api/Employee?FullName=${searchValue}`)
     .then((response) => {
       setApiData(response.data)
       setType("Principal")
+      toast("Patient Fetched Succesfully", {
+          duration: 4000,
+          style: {
+          borderRadius: '10px',
+          background: '#F8A370',
+          color: '#fff',
+       },
+        },
+        )
       console.log(response);
       console.log(apiData);
       
@@ -53,17 +64,35 @@ function Claims() {
   const searchEmployeeNumber = (searchId) => {
     setSearchEmployee(searchId)
     if(searchId.includes('~')){
-       axios.get(`https://lifeworthhmo.herokuapp.com/api/Dependant?DependantNumber=${searchId}`)
+       axios.get(`http://15.237.160.238:50/api/Dependant?DependantNumber=${searchId}`)
        .then((response)=>{
         setApiData(response.data)
         setType("Dependant")
+         toast("Patient Fetched Succesfully", {
+          duration: 4000,
+          style: {
+          borderRadius: '10px',
+          background: '#F8A370',
+          color: '#fff',
+       },
+        },
+        )
        console.log(response ,searchId);
        })
     } else {
-       axios.get(`https://lifeworthhmo.herokuapp.com/api/Employee?EmployeeNumber=${searchId}`)
+       axios.get(`http://15.237.160.238:50/api/Employee?EmployeeNumber=${searchId}`)
        .then((response)=>{
         setApiData(response.data)
         setType("Principal")
+         toast("Patient Fetched Succesfully", {
+          duration: 4000,
+          style: {
+          borderRadius: '10px',
+          background: '#F8A370',
+          color: '#fff',
+       },
+        },
+        )
        console.log(response);
        })
     } 
@@ -77,9 +106,21 @@ function Claims() {
   const [objj,  setObjj] = useState('')
  
   const Diagnosis = (e) => {
-       axios.get(`http://lifeworthhmo.herokuapp.com/api/Diagnosis`)
+       axios.get(`http://15.237.160.238:50/api/Diagnosis`)
     .then((response) => {
       setApiDataAuthor(response.data)
+      if(apiDataAuthor){
+       toast("Diagnosis Fetched Succesfully", {
+          duration: 4000,
+          style: {
+          borderRadius: '10px',
+          background: '#F8A370',
+          color: '#fff',
+       },
+        },
+        )
+      }
+       
       console.log(response);
       
     })
@@ -113,9 +154,21 @@ function Claims() {
    let date = (new Date().getFullYear());
  
   const Medical = (event) => {
-       axios.get(`http://lifeworthhmo.herokuapp.com/api/Classification`)
+       axios.get(`http://15.237.160.238:50/api/Classification`)
     .then((response) => {
       setApiDataMedical(response.data)
+      if(apiDataMedical){
+        toast("Classifications Fetched Succesfully", {
+          duration: 4000,
+          style: {
+          borderRadius: '10px',
+          background: '#F8A370',
+          color: '#fff',
+       },
+        },
+        )
+      }
+       
       console.log(response);
       
     })
@@ -123,13 +176,24 @@ function Claims() {
     
   }
    const Description = (event) => {
-       axios.get(`http://lifeworthhmo.herokuapp.com/api/Classification`)
+       axios.get(`http://15.237.160.238:50/api/Classification`)
     .then((response) => {
       setApiDataMedical(response.data)
       console.log(response);
     const price = apiDataMedical.filter((data)=>(data.description === event.target.value)).map(data => data.price)
     console.log(...price);
     setOptions(...price)
+    if(options){
+       toast("Unit Price Fetched Succesfully", { 
+          style: {
+          borderRadius: '10px',
+          background: '#F8A370',
+          color: '#fff',
+       },
+        },
+        )
+    }
+   
     console.log(option);
     })
      
@@ -163,16 +227,20 @@ function Claims() {
   const backClick = () =>{
     navigate.push("./dash")
   }
+  const reload = () => {
+     window.location.reload(false)
+  }
 
 
   
-  const defaultValues = {"chargesApproved":amountCalc , "idProvider":option.idProvider,"type":type, "protype":proType,"TreatmentDate":dates,"Day":day,"Month":month,"Year":year}
+  const defaultValues = {"chargesApproved":amountCalc , "idProvider":option.idProvider,"type":type, "protype":proType,"TreatmentDate":dates,"Day":day,"Month":month}
   const { register, handleSubmit , reset } = useForm({defaultValues});
  
     const addUp = (data) =>{
       data.type = type
       data.chargesApproved = amountCalc
       data.idProvider = providerId
+      data.idCompany = providerId
       data.employeeNo = option.employeeNo
       data.employeeName = option.fullName || option.name
       data.employeeSurname = option.surname
@@ -200,22 +268,30 @@ function Claims() {
     
     
    
-    
+    alert(`You are about to submit treatment for ${option.surname} ${option.fullName || option.name}`)
     setApiDataMedical(null)
     setAmountCalc('')
     setOptions("")
     
     axios
         .post(
-            'https://lifeworthhmo.herokuapp.com/api/Claims',
+            'http://15.237.160.238:50/api/Claims',
             claims,
             { headers: { 'Content-Type': 'application/json' }}
          )
         .then(response => {console.log(response)})
         .then(()=>{
-          //  navigate.push("./dash")
+         toast("Claims Submitted Succesfully", {
+          duration: 4000,
+          style: {
+          borderRadius: '10px',
+          background: '#F8A370',
+          color: '#fff',
+       },
+        },
+        )
         })
-        .catch(error => {console.log(error.data)});
+        .catch(error => {console.log(error)});
         
     };
   
@@ -224,7 +300,14 @@ function Claims() {
       <section className='claims-wrapper'>
         <div className='heading'>
           <h1>Input Claims</h1>
+          <div>
           <button onClick={backClick} className="bck" >Back to Dashboard</button>
+           <button onClick={reload} className="bck" >Reload</button>
+          <Toaster
+              position="top-center"
+              reverseOrder={false}
+          />
+          </div>
         </div>
          <form onSubmit={handleSubmit(addUp)}>
           <div className=''>
@@ -289,7 +372,7 @@ function Claims() {
           <div className='diagnosis'>
             <label htmlFor='diagnosis'>Diagnosis</label>
             <select name='' className='diag' onClick={Diagnosis} value=
-            {options} {...register("diagonsis")} id='diag'>
+            {options} {...register("diagnosis")} id='diag'>
              {!apiDataAuthor ? <option value=''>--select--</option>
              : apiDataAuthor.map((data,index)=>(
                 <option key = {index} value={data.diagnosis} >{`${data.diagnosis}`}</option>))}
@@ -309,7 +392,7 @@ function Claims() {
           
           <div className='Consultation-date'>
             <label htmlFor='diagnosis'>Consultation Date</label>
-            <input type='date' className='' onClick={(e)=>getDate(e)}  {...register("consultancyDate")} />
+            <input type='date' className='' onClick={(e)=>getDate(e)}  {...register("consultancyDate")} required/>
           </div>
         </div>
       </div>
@@ -343,10 +426,10 @@ function Claims() {
               <input type='number' className='charges' id="approved-charges" {...register("chargesApproved")} value={amountCalc}    disabled/>
             </div>
             <div className='comment'>
-              <label htmlFor=''>Amount Sent</label>
-              <input type='number' className='charges-approved' {...register("chargesSent",{valueAsNumber:true})} required/>
+              {/* <label htmlFor=''>Amount Sent</label>
+              <input type='number' className='charges-approved' {...register("chargesSent",{valueAsNumber:true})} required/> */}
               <label htmlFor=''>Comment</label>
-              <input type='text' className='charges-approved' {...register("Comment")}  />
+              <input type='text' className='charges' {...register("Comment")}  />
             </div>
           </div>
         </div>

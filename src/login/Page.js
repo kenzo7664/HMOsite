@@ -27,14 +27,14 @@ class Page extends Component{
      this.setState({post:true});
      this.state.post = setTimeout(() => {
        this.setState({post:false})
-     }, 18000);
+     }, 8000);
      e.preventDefault()
      if(this.state.emailAddress && this.state.password){
       PostData('Login', this.state).then((result)=>{
         let responseJSON = result
         
         
-        // console.log(result);
+        console.log(result);
         if(responseJSON.details){
            sessionStorage.setItem('token',responseJSON.token)
            sessionStorage.setItem('id',responseJSON.details.idProvider)
