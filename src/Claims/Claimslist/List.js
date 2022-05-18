@@ -19,7 +19,7 @@ useEffect(()=>{
     .catch((error)=>{
         console.error(error)
     })
-},[])
+},[providerId])
 return (
   <>
   <button onClick={backClick} className="bck" >Back to Dashboard</button>
@@ -31,11 +31,12 @@ return (
       <th>Diagnosis</th>
       <th>Classification</th>
       <th>Description</th>
-      <th>ChargesSent</th>
+      
       <th>Charges Approved</th>
+      <th>Status</th>
     </tr>
   </thead>
-  {claimsList.map((data , index)=>(
+  {claimsList ? claimsList.map((data , index)=>(
       <tbody className='size'>
     <tr key={index} >
       <td>{data.employeeName}</td>
@@ -43,12 +44,13 @@ return (
       <td>{data.diagnosis}</td>
       <td>{data.classification}</td>
       <td>{data.description}</td>
-       <td>{data.chargesSent}</td>
+       
        <td>{data.chargesApproved}</td>
-      
+       <td>{data.claimsStatus === "SUBMITTED"? "SUBMITTED":"APPROVED"}</td>
     </tr>
     </tbody>
-  ))}
+  )) : "Loading List ..." }
+  
   
     </table>
     </>

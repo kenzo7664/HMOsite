@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./verification.css";
 import * as FaIcons from "react-icons/fa";
+import axios from 'axios';
 import {useHistory} from "react-router-dom"
 
 function Verification() {
@@ -54,7 +55,7 @@ function Verification() {
     }
     if (codeValue !== "" && password2Value !== "" && password3Value !== "" && password2Value == password3Value){
       
-      window.location.href = "/"
+      // window.location.href = "/"
     }
     // else {
     //   setSuccessFor(passWord2, "Successfully Changed");
@@ -75,7 +76,7 @@ function Verification() {
     //   handleSubmit();
     // }
   };
-  async function resetPassword(){
+ function resetPassword(){
     
     let item = {"emailAddress" : emailAddress.trim(),
                  "code": code.trim(),
@@ -83,20 +84,10 @@ function Verification() {
     }
    let gu = JSON.stringify(item)
    console.log(gu);
+   axios.post(`http://15.237.160.238:50/api/Account/ResetPassword` ,gu , 
+   { headers: { 'Content-Type': 'application/json' }})
+   .then((response)=>{console.log(response)})
    
-   let result = await fetch("https://lifeworthhmo.herokuapp.com/api/Account/ResetPassword",{
-    method:'POST',
-    headers:{
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    },
-    body:gu
-    
-
-
-   })
-   
-   console.log(result);
   
   }
 

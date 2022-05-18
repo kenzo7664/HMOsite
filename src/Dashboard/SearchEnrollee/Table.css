@@ -9,8 +9,8 @@ table {
 }
 table thead th,
 table tfoot th {
-  color: #777;
-  background: rgba(0,0,0,.1);
+  color: #fff;
+  background: rgb(1, 1, 221);
 }
 table caption {
   padding:.5em;

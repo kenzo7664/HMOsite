@@ -42,3 +42,18 @@
   border: 2px solid lightslategray;
   
 }
+
+.background{
+  background-image: url(../lwlogo.png);
+  
+}
+
+.claims-wrapperr {
+  background: #fff;
+  width: 70%;
+  height: auto;
+  margin: auto;
+  padding: 15px;
+  border-radius: 30px;
+  
+}

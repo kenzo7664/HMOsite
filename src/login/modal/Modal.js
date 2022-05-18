@@ -21,7 +21,7 @@ function Modal() {
     let gu = JSON.stringify(item)
     console.log(gu);
     
-    let result = await fetch("https://lifeworthhmo.herokuapp.com/api/Account/RequestToken",{
+    let result = await fetch("http://15.237.160.238:50/api/Account/RequestToken",{
      method:'POST',
      headers:{
        "Content-Type": "application/json",

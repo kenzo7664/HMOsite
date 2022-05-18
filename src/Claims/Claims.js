@@ -233,7 +233,7 @@ function Claims() {
 
 
   
-  const defaultValues = {"chargesApproved":amountCalc , "idProvider":option.idProvider,"type":type, "protype":proType,"TreatmentDate":dates,"Day":day,"Month":month}
+  const defaultValues = {"chargesApproved":amountCalc , "idProvider":option.idProvider,"type":type, "protype":proType,"TreatmentDate":dates,"Day":day,"Month":month,"unitPrice":options}
   const { register, handleSubmit , reset } = useForm({defaultValues});
  
     const addUp = (data) =>{
@@ -242,13 +242,14 @@ function Claims() {
       data.idProvider = providerId
       data.idCompany = providerId
       data.employeeNo = option.employeeNo
-      data.employeeName = option.fullName || option.name
+      data.employeeName = option.surname + " " + (option.fullName || option.name)
       data.employeeSurname = option.surname
       data.consultancyDate = dates
       data.TreatmentDate = dates
       data.Day = day
       data.Month = month
       data.year = year
+      data.unitPrice = options
        console.log(data);
        claims.push(data)
        console.log(claims);
@@ -265,33 +266,34 @@ function Claims() {
     }
     const onSubmit = () => {
      console.log(claims);
-    
+     let answer = window.confirm(`You are about to submit treatment for ${option.surname} ${option.fullName || option.name}`)
     
    
-    alert(`You are about to submit treatment for ${option.surname} ${option.fullName || option.name}`)
+    
     setApiDataMedical(null)
     setAmountCalc('')
     setOptions("")
-    
-    axios
-        .post(
-            'http://15.237.160.238:50/api/Claims',
-            claims,
-            { headers: { 'Content-Type': 'application/json' }}
-         )
-        .then(response => {console.log(response)})
-        .then(()=>{
-         toast("Claims Submitted Succesfully", {
-          duration: 4000,
-          style: {
-          borderRadius: '10px',
-          background: '#F8A370',
-          color: '#fff',
-       },
-        },
-        )
-        })
-        .catch(error => {console.log(error)});
+    if(answer){
+        axios
+            .post(
+                'http://15.237.160.238:50/api/Claims',
+                claims,
+                { headers: { 'Content-Type': 'application/json' }}
+            )
+            .then(response => {console.log(response)})
+            .then(()=>{
+            toast("Claims Submitted Succesfully", {
+              duration: 4000,
+              style: {
+              borderRadius: '10px',
+              background: '#F8A370',
+              color: '#fff',
+          },
+            },
+            )
+            })
+            .catch(error => {console.log(error)});
+    }
         
     };
   
