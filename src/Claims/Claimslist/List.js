@@ -32,7 +32,7 @@ return (
       <th>Classification</th>
       <th>Description</th>
       
-      <th>Charges Approved</th>
+      <th>Charges Sent</th>
       <th>Status</th>
     </tr>
   </thead>
@@ -45,7 +45,7 @@ return (
       <td>{data.classification}</td>
       <td>{data.description}</td>
        
-       <td>{data.chargesApproved}</td>
+       <td>{data.chargesSent}</td>
        <td>{data.claimsStatus === "SUBMITTED"? "SUBMITTED":"APPROVED"}</td>
     </tr>
     </tbody>

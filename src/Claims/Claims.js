@@ -233,12 +233,12 @@ function Claims() {
 
 
   
-  const defaultValues = {"chargesApproved":amountCalc , "idProvider":option.idProvider,"type":type, "protype":proType,"TreatmentDate":dates,"Day":day,"Month":month,"unitPrice":options}
+  const defaultValues = {"chargesSent":amountCalc , "idProvider":option.idProvider,"type":type, "protype":proType,"TreatmentDate":dates,"Day":day,"Month":month,"unitPrice":options}
   const { register, handleSubmit , reset } = useForm({defaultValues});
  
     const addUp = (data) =>{
       data.type = type
-      data.chargesApproved = amountCalc
+      data.chargesSent = amountCalc
       data.idProvider = providerId
       data.idCompany = providerId
       data.employeeNo = option.employeeNo
@@ -424,8 +424,8 @@ function Claims() {
             
             </div>
             <div className="amount">
-              <label htmlFor=''>Charges Approved:</label>
-              <input type='number' className='charges' id="approved-charges" {...register("chargesApproved")} value={amountCalc}    disabled/>
+              <label htmlFor=''>Charges Sent:</label>
+              <input type='number' className='charges' id="approved-charges" {...register("chargesSent")} value={amountCalc}    disabled/>
             </div>
             <div className='comment'>
               {/* <label htmlFor=''>Amount Sent</label>
