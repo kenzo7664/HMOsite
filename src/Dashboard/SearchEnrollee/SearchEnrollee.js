@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import "./SearchEnrollee.css";
 import {DebounceInput} from 'react-debounce-input';
 import axios from 'axios';
@@ -11,55 +11,124 @@ function SearchEnrollee () {
   const [searchEmployee, setSearchEmployee] = useState("")
   const[apiData,  setApiData] = useState([])
   let navigate = useHistory();
+  const providerId = Number( sessionStorage.getItem("id"))
   const searchItems = (searchValue) => {
     setSearchInput(searchValue)
-      axios.get(`http://15.237.160.238:50/api/Employee?FullName=${searchValue}`) 
+      axios.get(`http://15.237.160.238:50/api/Employee?IdProvider=${providerId}&FullName=${searchValue}`) 
     .then((response) => {
       setApiData(response.data)
-      toast("Patient(s) Fetched Succesfully", {
-        duration: 4000,
-        style: {
-        borderRadius: '10px',
-        background: '#F8A370',
-        color: '#fff',
-     },
-      },
-      )
-      console.log(response,searchValue);
+      if(response.data.length >=1){
+        toast("Patient(s) Fetched Succesfully", {
+          duration: 4000,
+          style: {
+          borderRadius: '10px',
+          background: '#F8A370',
+          color: '#fff',
+       },
+        },
+        )
+      } else {
+        toast("Patient(s) NOT FOUND", {
+          duration: 4000,
+          style: {
+          borderRadius: '10px',
+          background: '#F8A370',
+          color: '#fff',
+       },
+        },
+        )
+      }
+      
+      
+    })
+  }
+
+  const searchName = (searchValue) => {
+    setSearchInput(searchValue)
+      axios.get(`http://15.237.160.238:50/api/Employee?IdProvider=${providerId}&Surname=${searchValue}`) 
+    .then((response) => {
+      setApiData(response.data)
+      if(response.data.length >=1){
+        toast("Patient(s) Fetched Succesfully", {
+          duration: 4000,
+          style: {
+          borderRadius: '10px',
+          background: '#F8A370',
+          color: '#fff',
+       },
+        },
+        )
+      } else {
+        toast("Patient(s) NOT FOUND", {
+          duration: 4000,
+          style: {
+          borderRadius: '10px',
+          background: '#F8A370',
+          color: '#fff',
+       },
+        },
+        )
+      }
+     
     })
   }
 
   const searchEmployeeNumber = (searchId) => {
     setSearchEmployee(searchId)
     if(searchId.includes('~')){
-       axios.get(`http://15.237.160.238:50/api/Dependant?DependantNumber=${searchId}`)
+       axios.get(`http://15.237.160.238:50/api/Dependant?idProvider=${providerId}&DependantNumber=${searchId}`)
        .then((response)=>{
         setApiData(response.data)
-        toast("Patient(s) Fetched Succesfully", {
-          duration: 4000,
-          style: {
-          borderRadius: '10px',
-          background: '#F8A370',
-          color: '#fff',
-       },
-        },
-        )
-       console.log(response ,searchId);
+        if(response.data.length >= 1){
+          toast("Patient(s) Fetched Succesfully", {
+            duration: 4000,
+            style: {
+            borderRadius: '10px',
+            background: '#F8A370',
+            color: '#fff',
+         },
+          },
+          )
+        }else {
+          toast("Patient(s) NOT FOUND", {
+            duration: 4000,
+            style: {
+            borderRadius: '10px',
+            background: '#F8A370',
+            color: '#fff',
+         },
+          },
+          )
+        }
+        
+     
        })
     } else {
-       axios.get(`http://15.237.160.238:50/api/Employee?EmployeeNumber=${searchId}`)
+       axios.get(`http://15.237.160.238:50/api/Employee?IdProvider=${providerId}&EmployeeNumber=${searchId}`)
        .then((response)=>{
         setApiData(response.data)
-        toast("Patient(s) Fetched Succesfully", {
-          duration: 4000,
-          style: {
-          borderRadius: '10px',
-          background: '#F8A370',
-          color: '#fff',
-       },
-        },
-        )
-       console.log(response);
+        if(response.data.length >= 1){
+          toast("Patient(s) Fetched Succesfully", {
+            duration: 4000,
+            style: {
+            borderRadius: '10px',
+            background: '#F8A370',
+            color: '#fff',
+         },
+          },
+          )
+        } else {
+          toast("Patient(s) NOT FOUND", {
+            duration: 4000,
+            style: {
+            borderRadius: '10px',
+            background: '#F8A370',
+            color: '#fff',
+         },
+          },
+          )
+        }
+       
        })
     }
      
@@ -72,9 +141,6 @@ function SearchEnrollee () {
     navigate.push("./dash")
   }
   
-  useEffect(()=>{
-    
-  }, [])
 
   
     return (
@@ -100,14 +166,13 @@ function SearchEnrollee () {
                 <label htmlFor=''>FULLNAME:</label>
                 <DebounceInput minLength={2}
                  debounceTimeout={1000}   onChange={(e) => searchItems(e.target.value)} />
-                
+                <label htmlFor=''>SURNAME:</label>
+                <DebounceInput minLength={2}
+                 debounceTimeout={1000}   onChange={(e) => searchName(e.target.value)} />
                 
                 </div>
                 <div className ="dependant">
-                {/* <label htmlFor=''>Fullname:</label>
-                <input type='text' className='charges-approved' />
-                <label htmlFor=''>Fullname:</label>
-                <input type='text' className='charges-approved' /> */}
+               
                 </div>
                
             </form>

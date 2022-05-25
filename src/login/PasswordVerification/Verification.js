@@ -5,21 +5,16 @@ import axios from 'axios';
 import {useHistory} from "react-router-dom"
 
 function Verification() {
-  
+  let history = useHistory()
   const [emailAddress, setEmailAddress] = useState("")
   const [code, setCode] = useState("")
   const [password, setPassword] = useState("")
-
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
-  let history = useHistory()
-  // const passWord1 = document.getElementById("email");
-  // const passWord2 = document.getElementById("password");
-  // const passWord3 = document.getElementById("confirmPassword")
-  // const token = document.getElementById("confirmToken")
-
+ 
+  
   const checkInputs = () => {
     const passWord1 = document.getElementById("email");
     const passWord2 = document.getElementById("password");
@@ -54,39 +49,21 @@ function Verification() {
       setSuccessFor(token, "Checked")
     }
     if (codeValue !== "" && password2Value !== "" && password3Value !== "" && password2Value === password3Value){
-      
       // window.location.href = "/"
     }
-    // else {
-    //   setSuccessFor(passWord2, "Successfully Changed");
-    // }
-
-    // if (passwordValue !== password2Value) {
-    //   setErrorFor(passWord2, "Passwords do not match!");
-    // }
-
-    // if (
-    //   document
-    //     .querySelectorAll(".form-control")[0]
-    //     .classList.contains("success") &&
-    //   document
-    //     .querySelectorAll(".form-control")[1]
-    //     .classList.contains("success")
-    // ) {
-    //   handleSubmit();
-    // }
+   
   };
  function resetPassword(){
     
-    let item = {"emailAddress" : emailAddress.trim(),
-                 "code": code.trim(),
-                 "password": password.trim()
+    let item = 
+    {"emailAddress" : emailAddress.trim(),
+      "code": code.trim(),
+      "password": password.trim()
     }
    let gu = JSON.stringify(item)
-   console.log(gu);
    axios.post(`http://15.237.160.238:50/api/Account/ResetPassword` ,gu , 
    { headers: { 'Content-Type': 'application/json' }})
-   .then((response)=>{console.log(response)})
+   .then((response)=>{console.debug(response)})
    
   
   }
@@ -105,12 +82,7 @@ function Verification() {
     small.innerText = message;
   };
 
-  // const handleChange = (e) => {
-  //   const name = e.target.name;
-  //   const value = e.target.value;
-  //   console.log(name, value);
-  //   setPerson({ ...person, [name]: value });
-  // };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -118,17 +90,6 @@ function Verification() {
     
     resetPassword()
     history.push("/")
-    
-    
-
-    // if (person.password === person.confirmPassword) {
-    //   const newPerson = { ...person, id: new Date().getTime().toString() };
-    //   setPeople([...people, newPerson]);
-    //   setPerson({ password: "", confirmPassword: "" });
-    // }
-    // if (person.password === person.confirmPassword) {
-    //  window.location.href="/page"
-    // }
   };
 
   return (

@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React ,{useState, useEffect} from 'react'
 import { useHistory } from "react-router";
-
 import "./list.css";
+
+
 function List (){
     let navigate = useHistory();
     const [claimsList , setClaimsList] = useState([])
@@ -10,16 +11,20 @@ function List (){
     const backClick = () =>{
       navigate.push("./dash")
     }
-useEffect(()=>{
-    axios.get(`http://15.237.160.238:50/api/Claims?IdProvider=${providerId}&pageNumber=1&pageSize=100`)
-    .then((response)=>{
-        console.log(response.data);
-        setClaimsList(response.data)
-    })
-    .catch((error)=>{
-        console.error(error)
-    })
-},[providerId])
+
+
+  useEffect(()=>{
+      axios.get(`http://15.237.160.238:50/api/Claims?IdProvider=${providerId}&pageNumber=1&pageSize=100`)
+      .then((response)=>{
+          setClaimsList(response.data)
+          console.log(response.data);
+      })
+      .catch((error)=>{
+          console.error(error)
+      })
+  },[providerId])
+
+
 return (
   <>
   <button onClick={backClick} className="bck" >Back to Dashboard</button>

@@ -1,8 +1,5 @@
 export function PostData(type, userData){
     let online = navigator.onLine? "online" :'offline'
-    console.log(
-      online
-    );
     let BaseUrl = "http://15.237.160.238:50/api/"
 
     return new Promise((resolve,reject)=>{

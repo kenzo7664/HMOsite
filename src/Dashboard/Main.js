@@ -11,14 +11,12 @@ import claims from "./refund.png";
 
 
 function Main() {
-  
   const [data, setData]=useState("")
   const [principal,setPrincipal] = useState('')
   const [dependant,setDependant] = useState('')
   const Info = sessionStorage.getItem('providername')
   const Id = sessionStorage.getItem('id')
 
- 
 
   useEffect(()=>{
     // eslint-disable-next-line no-useless-concat
@@ -32,7 +30,7 @@ function Main() {
     })
     .then(data => {
       setData(data)
-      console.log(data)
+     
     })
     .catch(error =>{
       console.error("Error fetching data:",error)
@@ -49,7 +47,7 @@ function Main() {
     })
     .then(principal => {
       setPrincipal(principal)
-      console.log(principal)
+     
     })
     .catch(error =>{
       console.error("Error fetching data:",error)
@@ -66,18 +64,21 @@ function Main() {
     })
     .then(dependant => {
       setDependant(dependant)
-      console.log(dependant)
+     
     })
     .catch(error =>{
       console.error("Error fetching data:",error)
       // setError(error)
     })
   },[Id])
+
+
+
+
+
+
   return (
-    <>
-      
-       
-        
+    <>  
       <div className='mainwrapper'>
           <h1 className = "msg">WELCOME {Info} </h1>
        <div className="mains">
@@ -85,10 +86,10 @@ function Main() {
           <div className='wrapper1'>
             <div className='sub-wrapper1'>
               <p className='itenary'>
-               Total Number of Submitted Claims
+               Claims Submitted
               </p>
               <br />
-              <Image style  />
+              <Image  />
             </div>
             <h3 className='item-quantity'>{data.totalCount}</h3>
           </div>
@@ -179,5 +180,8 @@ const Image3 = () => {
 const Image4 = () => {
   return <img src={claims} alt='' className='img6' />;
 };
+
+
+
 
 export default Main;

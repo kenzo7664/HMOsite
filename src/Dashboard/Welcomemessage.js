@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
 import "./welcom.css"
-
 import * as AiIcons from "react-icons/ai";
 
 
 
 class Welcomemessage extends Component{
-  
   constructor(props){
     super(props);
     this.state ={
@@ -48,4 +46,5 @@ class Welcomemessage extends Component{
  }
 
 
+ 
 export default Welcomemessage

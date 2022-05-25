@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./modal.css";
 import * as FaIcons from "react-icons/fa";
-
 import {useHistory} from "react-router-dom"
 
 
 function Modal() {
+  let history = useHistory()
   const [emailAddress, setEmailAddress] = useState("")
   const [modal, setModal] = useState(false);
   const toggleModal = (e) => {
@@ -13,7 +13,7 @@ function Modal() {
     e.preventDefault()
     
   };
-  let history = useHistory()
+  
   async function sendInfo(e){
      e.preventDefault()
      history.push("/verification")
@@ -21,30 +21,14 @@ function Modal() {
     let gu = JSON.stringify(item)
     console.log(gu);
     
-    let result = await fetch("http://15.237.160.238:50/api/Account/RequestToken",{
+    await fetch("http://15.237.160.238:50/api/Account/RequestToken",{
      method:'POST',
      headers:{
        "Content-Type": "application/json",
        "Accept": "application/json"
      },
      body:gu
-     
-
-
     })
-    
-    console.log(result);
-    
-   
-
-
-    // const infoEmail = (document.getElementById('email').value)
-    // // console.log(infoEmail);
-    // if(infoEmail === ""){
-    //  e.preventDefault()
-    // }else{
-    //   e.preventDefault()
-    // }
   }
 
   return (
@@ -60,10 +44,6 @@ function Modal() {
           <div className='modal-content'>
             <label>Input Email address to Receive Password Link </label>
             <input type="email" id="email" onChange = {(e)=> setEmailAddress(e.target.value)} />
-            {/* <button className='close-modal' onClick={toggleModal}>
-              Close
-            </button> */}
-            
               <button onClick={sendInfo} className ="snd" >
                 Send <FaIcons.FaLocationArrow /> 
               </button>

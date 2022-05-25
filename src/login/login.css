@@ -76,6 +76,14 @@ input {
   border-color: #F8A370;
   color: white;
 }
+ .password{
+   position: relative;
+ }
+.togglePassword{
+  position: absolute;
+  top: 15px;
+  right: 10px;
+}
 
 @media screen and (max-width: 400px) {
   .img {

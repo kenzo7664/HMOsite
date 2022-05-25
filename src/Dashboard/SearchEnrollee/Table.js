@@ -2,11 +2,10 @@ import React  from 'react'
 import "./Table.css";
 
 
-function Table({apiData , searchInput,  searchEmployee}){
-  
+function Table({apiData , searchInput,  searchEmployee}){ 
 return (
   <>
-  {searchInput.length >= 2 || searchEmployee ? apiData.map((name,index) =>{
+  {(searchInput.length >= 2 || searchEmployee) && apiData ? apiData.map((name,index) =>{
    return (
       <>
    <table>
@@ -38,6 +37,7 @@ return (
   </>
 )
 }
+
 
 export default Table
  

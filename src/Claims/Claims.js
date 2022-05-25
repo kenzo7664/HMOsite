@@ -12,12 +12,17 @@ import NumberFormat from 'react-number-format';
 
 
 function Claims() {
-  const [option,setOption] = useState({obj:null})
+  let navigate = useHistory();
+  let claims =[] 
+  let date = (new Date().getFullYear());
+  const [option,setOption] = useState([])
   const [options,setOptions] = useState()
+  const [content , setContent] = useState("")
   const[apiDataMedical,  setApiDataMedical] = useState([])
   const [searchInput, setSearchInput] = useState({});
   const [searchEmployee, setSearchEmployee] = useState("")
   const[apiData,  setApiData] = useState([])
+  const [amountCalc, setAmountCalc] = useState(0)
   const[apiDataAuthor,  setApiDataAuthor] = useState([])
   const [diagnosisCode,  setDiagnosisCode] = useState("")
   const [type,  setType] = useState("")
@@ -26,23 +31,17 @@ function Claims() {
   const [day,setDay] = useState(0)
   const [month,setMonth] = useState(0)
   const [year,setYear] = useState(0)
-  
-  let navigate = useHistory();
-  
-  
   const providerId = Number( sessionStorage.getItem("id"))
-  console.log((providerId));
-  let claims =[] 
   
-  
- 
-   const searchItems = (searchValue) => {
+  const searchItems = (searchValue) => {
     setSearchInput(searchValue)
-       axios.get(`http://15.237.160.238:50/api/Employee?FullName=${searchValue}`)
+      axios.get(`http://15.237.160.238:50/api/Employee?IdProvider=${providerId}&FullName=${searchValue}`) 
     .then((response) => {
       setApiData(response.data)
       setType("Principal")
-      toast("Patient Fetched Succesfully", {
+      console.log(response.data);
+      if(response.data.length >=1){
+        toast("Patient(s) Fetched Succesfully", {
           duration: 4000,
           style: {
           borderRadius: '10px',
@@ -51,8 +50,18 @@ function Claims() {
        },
         },
         )
-      console.log(response);
-      console.log(apiData);
+      } else {
+        toast("Patient(s) NOT FOUND", {
+          duration: 4000,
+          style: {
+          borderRadius: '10px',
+          background: '#F8A370',
+          color: '#fff',
+       },
+        },
+        )
+      }
+      
       
     })
   }
@@ -61,46 +70,92 @@ function Claims() {
   const searchEmployeeNumber = (searchId) => {
     setSearchEmployee(searchId)
     if(searchId.includes('~')){
-       axios.get(`http://15.237.160.238:50/api/Dependant?DependantNumber=${searchId}`)
+       axios.get(`http://15.237.160.238:50/api/Dependant?idProvider=${providerId}&DependantNumber=${searchId}`)
        .then((response)=>{
         setApiData(response.data)
         setType("Dependant")
-         toast("Patient Fetched Succesfully", {
-          duration: 4000,
-          style: {
-          borderRadius: '10px',
-          background: '#F8A370',
-          color: '#fff',
-       },
-        },
-        )
-       console.log(response ,searchId);
+        console.log(response.data);
+        if(response.data.length >= 1){
+          toast("Patient(s) Fetched Succesfully", {
+            duration: 4000,
+            style: {
+            borderRadius: '10px',
+            background: '#F8A370',
+            color: '#fff',
+         },
+          },
+          )
+        }else {
+          toast("Patient(s) NOT FOUND", {
+            duration: 4000,
+            style: {
+            borderRadius: '10px',
+            background: '#F8A370',
+            color: '#fff',
+         },
+          },
+          )
+        }
+        
+     
        })
     } else {
-       axios.get(`http://15.237.160.238:50/api/Employee?EmployeeNumber=${searchId}`)
+       axios.get(`http://15.237.160.238:50/api/Employee?IdProvider=${providerId}&EmployeeNumber=${searchId}`)
        .then((response)=>{
         setApiData(response.data)
         setType("Principal")
-         toast("Patient Fetched Succesfully", {
-          duration: 4000,
-          style: {
-          borderRadius: '10px',
-          background: '#F8A370',
-          color: '#fff',
-       },
-        },
-        )
-       console.log(response);
+        if(response.data.length >= 1){
+          toast("Patient(s) Fetched Succesfully", {
+            duration: 4000,
+            style: {
+            borderRadius: '10px',
+            background: '#F8A370',
+            color: '#fff',
+         },
+          },
+          )
+        } else {
+          toast("Patient(s) NOT FOUND", {
+            duration: 4000,
+            style: {
+            borderRadius: '10px',
+            background: '#F8A370',
+            color: '#fff',
+         },
+          },
+          )
+        }
+       
        })
-    } 
+    }
   }
-   function handleChange(event){
-    let obj = JSON.parse(event.target.value)
-    setOption(obj)
-    console.log(obj);
-  }
+
  
+
+  const handleSelect = (event)=>{
+    setContent(event.target.value);
+    if(content.includes('~')){
+      console.log(content);
+      axios.get(`http://15.237.160.238:50/api/Dependant?idProvider=${providerId}&DependantNumber=${content}`)
+      .then((response)=>{
+        console.log(response.data);
+        setOption(...response.data)
+        setType("Dependant")
+      })
+    } else {
+        console.log(content);
+        axios.get(`http://15.237.160.238:50/api/Employee?IdProvider=${providerId}&EmployeeNumber=${content}`)
+        .then((response)=>{
+          console.log(response.data);
+          setType('Principal')
+          setOption(...response.data)
+          
+        })
+    }
+    
+  }
   
+  console.log(option);
  
   const Diagnosis = (e) => {
        axios.get(`http://15.237.160.238:50/api/Diagnosis`)
@@ -128,29 +183,11 @@ function Claims() {
     if (apiDataAuthor){setDiagnosisCode(...code)}
     
     console.log(diagnosisCode);
-   
   }
  
-  const [amountCalc, setAmountCalc] = useState(0)
-  // const handleClick = () => {
-  //   var bu = document.querySelector(".medicals");
-  //   var clone = bu.cloneNode(true);
-  //   clone.id = "elem2";
-  //   bu.after(clone);
-  //   // setAmount(0)
-  //   setOption()
-  // };
-  // const removeClick = () =>{
-  //   var bu = document.querySelector(".medicals");
-  //   var clone = bu.cloneNode(true);
-  //   clone.id = "elem3";
-  //   bu.remove(clone.id);
-    
-  // }
-  
-   let date = (new Date().getFullYear());
  
-  const Medical = (event) => {
+ 
+  const Medical = () => {
        axios.get(`http://15.237.160.238:50/api/Classification`)
     .then((response) => {
       setApiDataMedical(response.data)
@@ -172,7 +209,9 @@ function Claims() {
     
     
   }
-   const Description = (event) => {
+
+
+  const Description = (event) => {
        axios.get(`http://15.237.160.238:50/api/Classification`)
     .then((response) => {
       setApiDataMedical(response.data)
@@ -191,11 +230,12 @@ function Claims() {
         )
     }
    
-    console.log(option);
+  
     })
      
     
   }
+
   const chargesApproved =()=>{
     const value = Number(document.getElementById('charges').value)
     const calcAmount = value * options
@@ -221,16 +261,18 @@ function Claims() {
     }
 
   }
+
   const backClick = () =>{
     navigate.push("./dash")
   }
+
   const reload = () => {
      window.location.reload(false)
   }
 
 
   
-  const defaultValues = {"chargesSent":amountCalc , "idProvider":option.idProvider,"type":type, "protype":proType,"TreatmentDate":dates,"Day":day,"Month":month,"unitPrice":options}
+  const defaultValues = {"chargesSent":amountCalc , "idProvider":providerId,"type":type, "protype":proType,"TreatmentDate":dates,"Day":day,"Month":month,"unitPrice":options}
   const { register, handleSubmit , reset } = useForm({defaultValues});
  
     const addUp = (data) =>{
@@ -292,7 +334,7 @@ function Claims() {
             .catch(error => {console.log(error)});
     }
         
-    };
+  };
   
   return (
     <>
@@ -322,16 +364,16 @@ function Claims() {
             
               <label htmlFor='enrolee'>Select Enrollee</label>
               
-              <select className='prov' id='' onClick={handleChange} >
+              <select className='prov' id='' onClick={handleSelect} >
                 {searchInput || searchEmployee ?  apiData.map((data,index , arr)=>( 
-                <option key = {index} value={JSON.stringify(data)} >{`${data.fullName || data.name}[ ${data.employeeNo}] `}</option>)): ""}
+                <option key = {index} value={data.employeeNo} >{`${data.fullName || data.name}[ ${data.employeeNo}] `}</option>)): ""}
                
               </select>
             </div>
             <div className='details'>
       <div className='status'>
         <label htmlFor='status'>Surname:</label>
-        <input type='text' className='stat' value={option.surname} {...register("employeeSurname")} disabled/>
+        <input type='text' className='stat' value={ option.surname || option.name } {...register("employeeSurname")} disabled/>
       </div>
       <div className='code-name'>
         <label for='Enn code'>Enn Code:</label>

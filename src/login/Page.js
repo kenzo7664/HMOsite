@@ -5,6 +5,7 @@ import Modal from './modal/Modal'
 import medi from "./medicalimg.jpg";
 import "./login.css";
 import RingLoader from "react-spinners/ClipLoader";
+import * as FaIcons from "react-icons/fa";
 
 class Page extends Component{
    constructor(props){
@@ -15,11 +16,17 @@ class Page extends Component{
        redirect: false,
        error:null,
        post:false,
-       data: ""
-      
-     }
+       data: "",
+       toggle:false
+      }
+
      this.Login = this.Login.bind(this);
+     this.togglePassword = this.togglePassword.bind(this)
      this.onChange = this.onChange.bind(this);
+   }
+
+   togglePassword(e){
+     this.setState({toggle:true})
    }
 
    
@@ -28,32 +35,25 @@ class Page extends Component{
      // eslint-disable-next-line react/no-direct-mutation-state
      this.state.post = setTimeout(() => {
        this.setState({post:false})
-     }, 8000);
+     }, 2000);
      e.preventDefault()
      if(this.state.emailAddress && this.state.password){
       PostData('Login', this.state).then((result)=>{
         let responseJSON = result
         
         
-        console.log(result);
+        
         if(responseJSON.details){
            sessionStorage.setItem('token',responseJSON.token)
            sessionStorage.setItem('id',responseJSON.details.idProvider)
            sessionStorage.setItem('providername',responseJSON.details.providerName)
            this.setState({redirect:true})
-           
-           
-        }
+          }
         else{
           console.log("login error");
           this.setState({error:"Wrong Login details !"})
           this.setState({data:result})
-          
-          
-        }
-      //  const info = this.state.data.details
-      //  const {word} = this.state.post
-      //  console.log(word);
+          }
       })
      }
      
@@ -63,7 +63,7 @@ class Page extends Component{
 
    onChange(e){
       this.setState({[e.target.name]: e.target.value})
-      console.log(this.state);
+     
    }
   
   
@@ -99,9 +99,10 @@ class Page extends Component{
               
             />
             <h2>PASSWORD</h2>
+            <div className="password">
             <label htmlFor='password'></label>
             <input
-              type='password'
+             type={this.state.toggle ? "text" : "password"}
               placeholder='Password'
               name = "password"
               className=''
@@ -109,6 +110,11 @@ class Page extends Component{
              
               
             />
+             <FaIcons.FaRegEyeSlash
+              onClick={this.togglePassword}
+              className="togglePassword"
+            />
+            </div>
             
             
             
@@ -127,5 +133,6 @@ class Page extends Component{
 const Images = () => {
   return <img src={medi} alt='' className='img' />;
 };
+
 
 export default Page;
