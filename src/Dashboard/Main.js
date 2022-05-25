@@ -1,5 +1,5 @@
 import{ React,useState,useEffect} from "react";
-import {PostData} from '../../src/services/PostData'
+
 import { Link } from 'react-router-dom';
 import "./main.css";
 import note from "./notes.png";
@@ -11,7 +11,7 @@ import claims from "./refund.png";
 
 
 function Main() {
-  const [error, setError]=useState(null)
+  
   const [data, setData]=useState("")
   const [principal,setPrincipal] = useState('')
   const [dependant,setDependant] = useState('')
@@ -21,6 +21,7 @@ function Main() {
  
 
   useEffect(()=>{
+    // eslint-disable-next-line no-useless-concat
     let ap = `http://15.237.160.238:50/api/Provider/TotalClaimsSubmitted/` + `${Id}`
     fetch (`${ap}`)
     .then(response =>{
@@ -35,8 +36,9 @@ function Main() {
     })
     .catch(error =>{
       console.error("Error fetching data:",error)
-      setError(error)
+      // setError(error)
     })
+    // eslint-disable-next-line no-useless-concat
     let api = `http://15.237.160.238:50/api/Provider/TotalPrincipal/` + `${Id}`
     fetch (`${api}`)
     .then(response =>{
@@ -51,8 +53,9 @@ function Main() {
     })
     .catch(error =>{
       console.error("Error fetching data:",error)
-      setError(error)
+      // setError(error)
     })
+    // eslint-disable-next-line no-useless-concat
     let td = `http://15.237.160.238:50/api/Provider/TotalDependant/` + `${Id}`
     fetch (`${td}`)
     .then(response =>{
@@ -67,9 +70,9 @@ function Main() {
     })
     .catch(error =>{
       console.error("Error fetching data:",error)
-      setError(error)
+      // setError(error)
     })
-  },[])
+  },[Id])
   return (
     <>
       

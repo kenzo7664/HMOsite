@@ -25,6 +25,7 @@ class Page extends Component{
    
    Login(e){
      this.setState({post:true});
+     // eslint-disable-next-line react/no-direct-mutation-state
      this.state.post = setTimeout(() => {
        this.setState({post:false})
      }, 8000);

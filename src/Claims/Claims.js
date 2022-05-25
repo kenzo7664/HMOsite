@@ -21,7 +21,7 @@ function Claims() {
   const[apiDataAuthor,  setApiDataAuthor] = useState([])
   const [diagnosisCode,  setDiagnosisCode] = useState("")
   const [type,  setType] = useState("")
-  const [proType, setProType] = useState('str')
+  const [proType] = useState('str')
   const [dates, setDates] = useState("")
   const [day,setDay] = useState(0)
   const [month,setMonth] = useState(0)

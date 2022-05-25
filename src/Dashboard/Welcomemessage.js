@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
 import "./welcom.css"
-import * as FaIcons from "react-icons/fa";
+
 import * as AiIcons from "react-icons/ai";
 
 

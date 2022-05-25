@@ -9,7 +9,7 @@ function Verification() {
   const [emailAddress, setEmailAddress] = useState("")
   const [code, setCode] = useState("")
   const [password, setPassword] = useState("")
-  const [people, setPeople] = useState([]);
+
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
@@ -30,30 +30,30 @@ function Verification() {
     const codeValue = token.value.trim();
     const password3Value = passWord3.value.trim()
 
-    if (passwordValue == "") {
+    if (passwordValue === "") {
       setErrorFor(passWord1, "Field can't be empty");
 
     } else{
       setSuccessFor(passWord1, "Checked")
     }
-    if (password2Value == ""){
+    if (password2Value === ""){
       setErrorFor(passWord2, "Field can't be empty");
     }else{
       setSuccessFor(passWord2, "Checked")
     }
-    if(password3Value == ""){
+    if(password3Value === ""){
       setErrorFor(passWord3, "Field can't be empty");
     } else if(password2Value !== password3Value){
       setErrorFor(passWord3, "Passwords do not match");  
     }else{
       setSuccessFor(passWord3, "Checked")
     }
-    if(codeValue ==""){
+    if(codeValue ===""){
       setErrorFor(token, "Field can't be empty"); 
     }else{
       setSuccessFor(token, "Checked")
     }
-    if (codeValue !== "" && password2Value !== "" && password3Value !== "" && password2Value == password3Value){
+    if (codeValue !== "" && password2Value !== "" && password3Value !== "" && password2Value === password3Value){
       
       // window.location.href = "/"
     }
