@@ -67,12 +67,13 @@ input {
 }
 
 .btn1 {
-  background: #6675df;
+  background: #F8A370;
   margin-top: 8%;
   cursor: pointer;
   width: 100%;
   height: 40px;
   border-radius: 13px;
+  border-color: #F8A370;
   color: white;
 }
 

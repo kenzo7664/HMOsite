@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios';
 import "./claims.css";
-import Details from "./details/Details";
-import Authorization from "./authorization/Authorization";
-import Medicals from "./Medicals/Medicals";
 import { useForm } from "react-hook-form";
 import {DebounceInput} from 'react-debounce-input';
 import '../Claims/authorization/authorization.css'
@@ -11,6 +8,7 @@ import '../Claims/Medicals/medical.css'
 import '../Claims/details/details.css'
 import toast, { Toaster } from 'react-hot-toast';
 import { useHistory } from "react-router";
+import NumberFormat from 'react-number-format';
 
 
 function Claims() {
@@ -28,15 +26,14 @@ function Claims() {
   const [day,setDay] = useState(0)
   const [month,setMonth] = useState(0)
   const [year,setYear] = useState(0)
-  const [Refresh, setRefresh] = React.useState(false);
+  
   let navigate = useHistory();
   
   
   const providerId = Number( sessionStorage.getItem("id"))
   console.log((providerId));
   let claims =[] 
-  const [claim, setClaim] = useState([])
- 
+  
   
  
    const searchItems = (searchValue) => {
@@ -103,7 +100,7 @@ function Claims() {
     console.log(obj);
   }
  
-  const [objj,  setObjj] = useState('')
+  
  
   const Diagnosis = (e) => {
        axios.get(`http://15.237.160.238:50/api/Diagnosis`)
@@ -394,7 +391,7 @@ function Claims() {
           
           <div className='Consultation-date'>
             <label htmlFor='diagnosis'>Consultation Date</label>
-            <input type='date' className='' onClick={(e)=>getDate(e)}  {...register("consultancyDate")} required/>
+            <input type='date' className='' onSelect={(e)=>getDate(e)}  {...register("consultancyDate")} required/>
           </div>
         </div>
       </div>
@@ -420,16 +417,14 @@ function Claims() {
               <label htmlFor=''>No of days/Qty:</label>
               <input type='number' className='charges-approved' id="charges" {...register("qty",{valueAsNumber:true})} onChange={chargesApproved}/>
               <label htmlFor=''>Unit price:</label>
-              <input type='text' className='charges-approved' value={options} disabled />
+              <NumberFormat thousandSeparator={true} prefix={'N'} className='charges-approved' value={options} disabled />
             
             </div>
             <div className="amount">
               <label htmlFor=''>Charges Sent:</label>
-              <input type='number' className='charges' id="approved-charges" {...register("chargesSent")} value={amountCalc}    disabled/>
+              <NumberFormat thousandSeparator={true} prefix={'N'} className='charges' id="approved-charges" {...register("chargesSent")} value={amountCalc}    disabled/>
             </div>
-            <div className='comment'>
-              {/* <label htmlFor=''>Amount Sent</label>
-              <input type='number' className='charges-approved' {...register("chargesSent",{valueAsNumber:true})} required/> */}
+            <div className='comment'> 
               <label htmlFor=''>Comment</label>
               <input type='text' className='charges' {...register("Comment")}  />
             </div>

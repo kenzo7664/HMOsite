@@ -81,9 +81,9 @@ function Main() {
         <div className='sub-mainwrapper1'>
           <div className='wrapper1'>
             <div className='sub-wrapper1'>
-              <a href='#' className='itenary'>
+              <p className='itenary'>
                Total Number of Submitted Claims
-              </a>
+              </p>
               <br />
               <Image style  />
             </div>
@@ -91,9 +91,9 @@ function Main() {
           </div>
           <div className='wrapper1'>
             <div className='sub-wrapper1'>
-              <a href='https://www.youtube.com' className='itenary'>
+              <p  className='itenary'>
                 Total Number of Principals
-              </a>
+              </p>
               <br />
               <Image />
             </div>
@@ -102,9 +102,9 @@ function Main() {
           <Link to = "/claims">
           <div className='wrapper1' href ="/claims" >
             <div className='sub-wrapper1'>
-              <a href='' className='itenary'>
+              <p  className='itenary'>
                 Claims
-              </a>
+              </p>
               <br />
               <Image4 />
             </div>
@@ -118,9 +118,9 @@ function Main() {
           <Link to ='/List'>
           <div className='wrapper2'>
             <div className='sub-wrapper2'>
-              <a href='' className='itenary'>
+              <p className='itenary'>
                 List of Claims Submitted
-              </a>
+              </p>
               <br />
               <Imagee />
             </div>
@@ -129,9 +129,9 @@ function Main() {
           </Link>
           <div className='wrapper2'>
             <div className='sub-wrapper2'>
-              <a href='https://www.youtube.com' className='itenary'>
+              <p className='itenary'>
                 Total Number of Dependants
-              </a>
+              </p>
               <br />
               <Image2 />
             </div>
@@ -140,9 +140,9 @@ function Main() {
           <Link to ="/SearchEnrollee">
           <div className='wrapper2'>
             <div className='sub-wrapper2'>
-              <a href='https://www.youtube.com' className='itenary'>
+              <p className='itenary'>
                 Search Enrollee
-              </a>
+              </p>
               <br />
               <Image3 />
             </div>
