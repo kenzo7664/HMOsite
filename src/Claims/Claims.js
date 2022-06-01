@@ -13,7 +13,7 @@ import NumberFormat from 'react-number-format';
 
 function Claims() {
   let navigate = useHistory();
-  let claims =[] 
+  let claims = [] 
   let date = (new Date().getFullYear());
   const [option,setOption] = useState([])
   const [options,setOptions] = useState()
@@ -28,6 +28,7 @@ function Claims() {
   const [type,  setType] = useState("")
   const [proType] = useState('str')
   const [dates, setDates] = useState("")
+  const [claimsList , setClaimsList] = useState([])
   const [day,setDay] = useState(0)
   const [month,setMonth] = useState(0)
   const [year,setYear] = useState(0)
@@ -39,7 +40,6 @@ function Claims() {
     .then((response) => {
       setApiData(response.data)
       setType("Principal")
-      console.log(response.data);
       if(response.data.length >=1){
         toast("Patient(s) Fetched Succesfully", {
           duration: 4000,
@@ -74,7 +74,6 @@ function Claims() {
        .then((response)=>{
         setApiData(response.data)
         setType("Dependant")
-        console.log(response.data);
         if(response.data.length >= 1){
           toast("Patient(s) Fetched Succesfully", {
             duration: 4000,
@@ -135,18 +134,14 @@ function Claims() {
   const handleSelect = (event)=>{
     setContent(event.target.value);
     if(content.includes('~')){
-      console.log(content);
       axios.get(`http://15.237.160.238:50/api/Dependant?idProvider=${providerId}&DependantNumber=${content}`)
       .then((response)=>{
-        console.log(response.data);
         setOption(...response.data)
         setType("Dependant")
       })
-    } else {
-        console.log(content);
+    } else if (content) {
         axios.get(`http://15.237.160.238:50/api/Employee?IdProvider=${providerId}&EmployeeNumber=${content}`)
         .then((response)=>{
-          console.log(response.data);
           setType('Principal')
           setOption(...response.data)
           
@@ -154,8 +149,7 @@ function Claims() {
     }
     
   }
-  
-  console.log(option);
+
  
   const Diagnosis = (e) => {
        axios.get(`http://15.237.160.238:50/api/Diagnosis`)
@@ -172,17 +166,11 @@ function Claims() {
         },
         )
       }
-       
-      console.log(response);
-      
     })
    const code =  apiDataAuthor.filter((data)=>
       (data.diagnosis === e.target.value) 
     ).map(data=>data.diagnosisCode)
-    console.log(code);
     if (apiDataAuthor){setDiagnosisCode(...code)}
-    
-    console.log(diagnosisCode);
   }
  
  
@@ -202,12 +190,7 @@ function Claims() {
         },
         )
       }
-       
-      console.log(response);
-      
     })
-    
-    
   }
 
 
@@ -215,9 +198,7 @@ function Claims() {
        axios.get(`http://15.237.160.238:50/api/Classification`)
     .then((response) => {
       setApiDataMedical(response.data)
-      console.log(response);
     const price = apiDataMedical.filter((data)=>(data.description === event.target.value)).map(data => data.price)
-    console.log(...price);
     setOptions(...price)
     if(options){
        toast("Unit Price Fetched Succesfully", { 
@@ -251,13 +232,10 @@ function Claims() {
      const day = dateStr.getDate()
      const month = dateStr.getMonth() + 1
      const year = dateStr.getFullYear()
-     console.log(day,month, year);
      setDay(day)
      setMonth(month)
      setYear(year)
-     
      setDates(iso)
-     console.log(dates);
     }
 
   }
@@ -289,37 +267,81 @@ function Claims() {
       data.Month = month
       data.year = year
       data.unitPrice = options
-       console.log(data);
-       claims.push(data)
+
+      const dataInfo={
+        day: data.Day,
+        description: data.Description,
+        month: data.Month,
+        treatmentDate: data.TreatmentDate,
+        authDate: data.authdate,
+        authorcode: data.authorcode,
+        chargesSent: data.chargesSent,
+        classification:data.classification,
+        consultancyDate: data.consultancyDate,
+        details: data.details,
+        diagnosis:data.diagnosis,
+        employeeName:data.employeeName,
+        employeeSurname:data.employeeSurname,
+        employeeNo:data.employeeNo,
+        idCompany:data.idCompany,
+        idProvider:data.idProvider,
+        proType:data.protype,
+        qty:data.qty,
+        type:data.type,
+        unitPrice:data.unitPrice,
+        year:data.year
+
+
+
+       
+
+    }
+     
+       claims.push(dataInfo)
+       toast("Treatment Added Succesfully", {
+        duration: 2000,
+        style: {
+        borderRadius: '10px',
+        background: '#F8A370',
+        color: '#fff',
+    },
+      },
+      )
+       setClaimsList(prev => prev.concat(dataInfo))
        console.log(claims);
-       console.log(claims.length);
-       if (claims.length >= 0){
-         onSubmit()
-       }
+       console.log(dataInfo);
+       console.log(claimsList);
+      //  setClaimsList((prevstate)=>{...prevstate, claims})
+     
+      //  if (claims.length >= 0){
+      //   //  onSubmit()
+      //  }
         setApiDataMedical(null)
         setAmountCalc('')
         setOptions("")
         reset()
+        
       
        
     }
+    console.log(claimsList);
     const onSubmit = () => {
-     console.log(claims);
      let answer = window.confirm(`You are about to submit treatment for ${option.surname} ${option.fullName || option.name}`)
     
    
     
-    setApiDataMedical(null)
-    setAmountCalc('')
-    setOptions("")
-    if(answer){
+    
+     if(answer){
         axios
             .post(
                 'http://15.237.160.238:50/api/Claims',
-                claims,
+                claimsList,
                 { headers: { 'Content-Type': 'application/json' }}
             )
             .then(response => {console.log(response)})
+            .then(()=>{
+              reload()
+            })
             .then(()=>{
             toast("Claims Submitted Succesfully", {
               duration: 4000,
@@ -331,8 +353,8 @@ function Claims() {
             },
             )
             })
-            .catch(error => {console.log(error)});
-    }
+            .catch(error => {console.error(error)});
+      }
         
   };
   
@@ -474,10 +496,49 @@ function Claims() {
         </div>
         
       </div>
-      <button type='submit' className='btnn1'>Submit</button>
+      <button type='submit' className='btnn1'>Add Up</button>
           </div>
           
         </form>
+        <div className='small-table'>
+          <h2>Claims Treatment For:  {option ? ((option.surname || option.name) || ( option.fullName || option.name) ): ""}</h2>
+          <h2>EnroleeNumber: {option.employeeNo}</h2>
+        </div>
+        <table>
+         
+      <thead>
+        <tr>
+          <th>Classification</th>
+          <th>Description</th>
+          <th>Diagnosis</th>
+          <th>Consultancy Date</th>
+          <th>Details</th>
+          <th>Authorcode</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th>Amount</th>
+         
+        </tr>
+      </thead>
+      {claimsList.map((data,index)=>(
+      <tbody className='size'>
+        <tr key = {index}>
+          <td>{data.classification}</td>
+          <td>{data.description}</td>
+          <td>{data.diagnosis}</td>
+          <td>{data.consultancyDate.substring(0,10)}</td>
+          <td>{data.details}</td>
+          <td>{data.authorcode}</td>
+          <td>{data.unitPrice}</td>
+          <td>{data.qty}</td>
+          <td>{data.chargesSent}</td>
+         
+          
+        </tr>
+        </tbody>
+        ))}
+    </table>
+    <button type='submit' onClick={onSubmit} className='btnn1'>Submit</button>
       </section>
     </>
   );

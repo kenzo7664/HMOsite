@@ -46,6 +46,13 @@ h2 {
   
 }
 
+.submit-btn {
+  width: 100%;
+  padding-top: 10px;
+  border-radius: 10px;
+  background: white
+}
+
 .btnn1 {
   width: 100%;
   padding: 10px;
@@ -122,4 +129,8 @@ select{
   cursor: pointer;
   background: #F8A370;
   border-color: #F8A370;
+}
+
+.small-table{
+  padding:30px;
 }
