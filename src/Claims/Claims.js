@@ -256,6 +256,7 @@ function Claims() {
     const addUp = (data) =>{
       data.type = type
       data.chargesSent = amountCalc
+      data.chargesApproved = amountCalc
       data.idProvider = providerId
       data.idCompany = providerId
       data.employeeNo = option.employeeNo
@@ -276,6 +277,7 @@ function Claims() {
         authDate: data.authdate,
         authorcode: data.authorcode,
         chargesSent: data.chargesSent,
+        chargesApproved:data.chargesSent,
         classification:data.classification,
         consultancyDate: data.consultancyDate,
         details: data.details,
@@ -327,10 +329,6 @@ function Claims() {
     console.log(claimsList);
     const onSubmit = () => {
      let answer = window.confirm(`You are about to submit treatment for ${option.surname} ${option.fullName || option.name}`)
-    
-   
-    
-    
      if(answer){
         axios
             .post(
