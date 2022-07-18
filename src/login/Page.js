@@ -35,7 +35,7 @@ class Page extends Component{
      // eslint-disable-next-line react/no-direct-mutation-state
      this.state.post = setTimeout(() => {
        this.setState({post:false})
-     }, 2000);
+     }, 8000);
      e.preventDefault()
      if(this.state.emailAddress && this.state.password){
       PostData('Login', this.state).then((result)=>{

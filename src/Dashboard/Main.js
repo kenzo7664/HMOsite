@@ -12,6 +12,7 @@ import claims from "./refund.png";
 
 function Main() {
   const [data, setData]=useState("")
+  const [statusCount, setStatusCount] = useState("")
   const [principal,setPrincipal] = useState('')
   const [dependant,setDependant] = useState('')
   const Info = sessionStorage.getItem('providername')
@@ -20,7 +21,7 @@ function Main() {
 
   useEffect(()=>{
     // eslint-disable-next-line no-useless-concat
-    let ap = `http://15.237.160.238:50/api/Provider/TotalClaimsSubmitted/` + `${Id}`
+    let ap = `http://15.237.160.238:50/api/Claims/daily/` + `${Id}`
     fetch (`${ap}`)
     .then(response =>{
       if(response.ok){
@@ -29,7 +30,27 @@ function Main() {
       throw response
     })
     .then(data => {
+      console.log(data);
       setData(data)
+     
+    })
+    .catch(error =>{
+      console.error("Error fetching data:",error)
+      // setError(error)
+    })
+
+    // eslint-disable-next-line no-useless-concat
+    let apii = `http://15.237.160.238:50/api/Provider/TotalClaimsSubmitted/` + `${Id}`
+    fetch (`${apii}`)
+    .then(response =>{
+      if(response.ok){
+        return response.json()
+      }
+      throw response
+    })
+    .then(data => {
+      console.log(data);
+      setStatusCount(data)
      
     })
     .catch(error =>{
@@ -83,6 +104,7 @@ function Main() {
           <h1 className = "msg">WELCOME {Info} </h1>
        <div className="mains">
         <div className='sub-mainwrapper1'>
+          <Link to ="/Submittedlist">
           <div className='wrapper1'>
             <div className='sub-wrapper1'>
               <p className='itenary'>
@@ -91,8 +113,9 @@ function Main() {
               <br />
               <Image  />
             </div>
-            <h3 className='item-quantity'>{data.totalCount}</h3>
+            <h3 className='item-quantity'>{data.dailyCount}</h3>
           </div>
+          </Link>
           <div className='wrapper1'>
             <div className='sub-wrapper1'>
               <p  className='itenary'>
@@ -107,7 +130,7 @@ function Main() {
           <div className='wrapper1' href ="/claims" >
             <div className='sub-wrapper1'>
               <p  className='itenary'>
-                Claims
+                New Claims
               </p>
               <br />
               <Image4 />
@@ -123,12 +146,12 @@ function Main() {
           <div className='wrapper2'>
             <div className='sub-wrapper2'>
               <p className='itenary'>
-                List of Claims Submitted
+                Claims History
               </p>
               <br />
               <Imagee />
             </div>
-            
+            <h3 className='item-quantity'>{statusCount.totalCount}</h3>
           </div>
           </Link>
           <div className='wrapper2'>

@@ -14,7 +14,7 @@
   height: 24vh;
 
   display: flex;
-  background: white;
+  background: rgb(83, 83, 248);
   margin-bottom: 5%;
   box-shadow: -3px 5px 5px 4px rgba(167, 182, 171, 0.75);
   -webkit-box-shadow: -3px 5px 5px 4px rgba(167, 182, 171, 0.75);
@@ -47,12 +47,13 @@
 
 .itenary {
   padding-left: 5%;
+  color:#F8A370 ;
 }
 
 .item-quantity {
   font-size: 24px;
   padding-top: 13%;
-  color: royalblue;
+  color:#F8A370
 }
 
 .sub-mainwrapper1 {
@@ -85,7 +86,7 @@
   width: 100%;
   height: 24vh;
   display: flex;
-  background: white;
+  background: rgb(83, 83, 248);
   margin-bottom: 5.5%;
   box-shadow: -3px 5px 5px 4px rgba(167, 182, 171, 0.75);
   -webkit-box-shadow: -3px 5px 5px 4px rgba(167, 182, 171, 0.75);

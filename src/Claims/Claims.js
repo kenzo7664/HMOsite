@@ -25,6 +25,7 @@ function Claims() {
   const [amountCalc, setAmountCalc] = useState(0)
   const[apiDataAuthor,  setApiDataAuthor] = useState([])
   const [diagnosisCode,  setDiagnosisCode] = useState("")
+  const [codes, setCodes] = useState("")
   const [type,  setType] = useState("")
   const [proType] = useState('str')
   const [dates, setDates] = useState("")
@@ -223,21 +224,32 @@ function Claims() {
     setAmountCalc(calcAmount);
   }
 
-  const getDate = (e) =>{
+  const getDateConsul = (e) =>{
+      if(e.target.value !== ""){
+        console.log(e.target.value);
+        const dateConvert = e.target.value
+       const dateStr = new Date (dateConvert)
+      
+       const iso = dateStr.toISOString()
+    
+     
+       setDates(iso)
+      }
+      
+      
+     
+  
 
-    if(e.target.value !== ""){
-     const dateConvert = e.target.value
-     const dateStr = new Date (dateConvert)
-     const iso = dateStr.toISOString()
-     const day = dateStr.getDate()
-     const month = dateStr.getMonth() + 1
-     const year = dateStr.getFullYear()
-     setDay(day)
-     setMonth(month)
-     setYear(year)
-     setDates(iso)
-    }
+  }
 
+  const getDate = ()=>{
+    const dateNew = new Date ()
+    const day = dateNew.getDate()
+    const month = dateNew.getMonth() + 1
+    const year = dateNew.getFullYear()
+    setDay(day)
+    setMonth(month)
+    setYear(year)
   }
 
   const backClick = () =>{
@@ -249,11 +261,15 @@ function Claims() {
   }
 
 
-  
-  const defaultValues = {"chargesSent":amountCalc , "idProvider":providerId,"type":type, "protype":proType,"TreatmentDate":dates,"Day":day,"Month":month,"unitPrice":options}
+  const getAuthorCode = (e)=>{
+     console.log(e.target.value);
+     setCodes(e.target.value)
+  }
+  const defaultValues = {"chargesSent":amountCalc ,"authorcode":codes,"consultancyDate":"","qty":0, "details":"", "idProvider":providerId,"type":type, "protype":proType,"TreatmentDate":dates,"Day":day,"Month":month,"unitPrice":options}
   const { register, handleSubmit , reset } = useForm({defaultValues});
  
     const addUp = (data) =>{
+      getDate()
       data.type = type
       data.chargesSent = amountCalc
       data.chargesApproved = amountCalc
@@ -268,6 +284,7 @@ function Claims() {
       data.Month = month
       data.year = year
       data.unitPrice = options
+      data.approvedQty = data.qty
 
       const dataInfo={
         day: data.Day,
@@ -289,6 +306,7 @@ function Claims() {
         idProvider:data.idProvider,
         proType:data.protype,
         qty:data.qty,
+        approvedQty:data.qty,
         type:data.type,
         unitPrice:data.unitPrice,
         year:data.year
@@ -321,14 +339,14 @@ function Claims() {
         setApiDataMedical(null)
         setAmountCalc('')
         setOptions("")
-        reset()
+        reset(defaultValues)
         
       
        
     }
     console.log(claimsList);
     const onSubmit = () => {
-     let answer = window.confirm(`You are about to submit treatment for ${option.surname} ${option.fullName || option.name}`)
+     let answer = window.confirm(`You are about to submit the Claims treatment for ${option.surname} ${option.fullName || option.name}`)
      if(answer){
         axios
             .post(
@@ -355,6 +373,13 @@ function Claims() {
       }
         
   };
+  console.log(claimsList);
+  const totalBilled = claimsList.map((data)=>data.chargesSent)
+  console.log(totalBilled);
+  const totalBilledAmount = totalBilled.reduce((a,b)=> a + b , 0)
+  console.log(totalBilledAmount);
+  // const code = claimsList.map((data)=>data.authorcode)
+  // console.log(code);
   
   return (
     <>
@@ -426,7 +451,7 @@ function Claims() {
       <div className='authorization'>
         <div className='Company'>
           <label htmlFor='company'>Authorization Code/Date</label>
-          <input type='text' className='author' {...register("authorcode")} required/>
+          <input type='text' className='author' {...register("authorcode")} onChange={getAuthorCode}/>
           <input type='text' className='author'  value={new Date().toISOString()} {...register("authdate")} />
         </div>
         <div className='headin'>
@@ -452,8 +477,8 @@ function Claims() {
           
           
           <div className='Consultation-date'>
-            <label htmlFor='diagnosis'>Consultation Date</label>
-            <input type='date' className='' onSelect={(e)=>getDate(e)}  {...register("consultancyDate")} required/>
+            <label htmlFor='diagnosis'>Encounter Date</label>
+            <input type='date' className='' onSelect={(e)=>getDateConsul(e)} {...register("consultancyDate")} required/>
           </div>
         </div>
       </div>
@@ -501,6 +526,7 @@ function Claims() {
         <div className='small-table'>
           <h2>Claims Treatment For:  {option ? ((option.surname || option.name) || ( option.fullName || option.name) ): ""}</h2>
           <h2>EnroleeNumber: {option.employeeNo}</h2>
+          <h2>Total Amount Billed: <NumberFormat value={totalBilledAmount}  displayType={'text'} thousandSeparator={true} prefix={'NGN'} /></h2>
         </div>
         <table>
          

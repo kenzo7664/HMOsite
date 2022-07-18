@@ -1,6 +1,6 @@
 .navbar {
   background: rgb(248, 163, 6);
-  height: 80px;
+  height: 40px;
 
   display: flex;
   justify-content: flex-start;
@@ -9,7 +9,7 @@
 }
 
 .menu-bars {
-  font-size: 3rem;
+  font-size: 2rem;
   background: none;
 }
 

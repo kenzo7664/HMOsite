@@ -8,22 +8,30 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
-    title: "Claims",
-    path: "/Claims",
-    icon: <FaIcons.FaRegBell />,
-    cName: "nav-text",
-  },
-  {
     title: "Search Enrollee",
     path: "/SearchEnrollee",
     icon: <FaIcons.FaSearch />,
     cName: "nav-text",
   },
   {
-    title: "Submitted claims list",
+    title: "Claims Submitted",
+    path: "/submittedList",
+    icon: <FaIcons.FaRegBell />,
+    cName: "nav-text",
+  },
+  {
+    title: "Claims History",
     path: "/List",
     icon: <FaIcons.FaRegBell />,
     cName: "nav-text",
   },
+  {
+    title: "New Claims",
+    path: "/Claims",
+    icon: <FaIcons.FaRegBell />,
+    cName: "nav-text",
+  },
+  
+ 
 
 ];
