@@ -29,6 +29,9 @@ function Modal() {
      },
      body:gu
     })
+    .then((res)=>{
+      console.log(res.request);
+    })
   }
 
   return (

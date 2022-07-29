@@ -223,8 +223,18 @@ function Claims() {
     const calcAmount = value * options
     setAmountCalc(calcAmount);
   }
+  const getDate = ()=>{
+    const dateNew = new Date ()
+    const day = dateNew.getDate()
+    const month = dateNew.getMonth() + 1
+    const year = dateNew.getFullYear()
+    setDay(day)
+    setMonth(month)
+    setYear(year)
+  }
 
   const getDateConsul = (e) =>{
+       getDate()
       if(e.target.value !== ""){
         console.log(e.target.value);
         const dateConvert = e.target.value
@@ -242,16 +252,7 @@ function Claims() {
 
   }
 
-  const getDate = ()=>{
-    const dateNew = new Date ()
-    const day = dateNew.getDate()
-    const month = dateNew.getMonth() + 1
-    const year = dateNew.getFullYear()
-    setDay(day)
-    setMonth(month)
-    setYear(year)
-  }
-
+  
   const backClick = () =>{
     navigate.push("./dash")
   }
@@ -269,7 +270,7 @@ function Claims() {
   const { register, handleSubmit , reset } = useForm({defaultValues});
  
     const addUp = (data) =>{
-      getDate()
+      
       data.type = type
       data.chargesSent = amountCalc
       data.chargesApproved = amountCalc
