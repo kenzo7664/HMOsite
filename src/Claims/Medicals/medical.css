@@ -16,7 +16,7 @@
 
 .classification-desc{
  display: flex;
- justify-content: space-around;
+
  padding: 2%;
 }
 
@@ -29,6 +29,12 @@
 .charges-approved {
   width: 39%;
   max-height: 4vh;
+  
+}
+
+.description{
+   width: 45%;
+   margin: 0.3rem;
 }
 
 .charges{

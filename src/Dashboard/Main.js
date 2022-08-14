@@ -21,7 +21,7 @@ function Main() {
 
   useEffect(()=>{
     // eslint-disable-next-line no-useless-concat
-    let ap = `http://15.237.160.238:50/api/Claims/daily/` + `${Id}`
+    let ap = `https://portal.lifeworthhmoportal.com/api/Claims/daily/` + `${Id}`
     fetch (`${ap}`)
     .then(response =>{
       if(response.ok){
@@ -40,7 +40,7 @@ function Main() {
     })
 
     // eslint-disable-next-line no-useless-concat
-    let apii = `http://15.237.160.238:50/api/Provider/TotalClaimsSubmitted/` + `${Id}`
+    let apii = `https://portal.lifeworthhmoportal.com/api/Provider/TotalClaimsSubmitted/` + `${Id}`
     fetch (`${apii}`)
     .then(response =>{
       if(response.ok){
@@ -58,7 +58,7 @@ function Main() {
       // setError(error)
     })
     // eslint-disable-next-line no-useless-concat
-    let api = `http://15.237.160.238:50/api/Provider/TotalPrincipal/` + `${Id}`
+    let api = `https://portal.lifeworthhmoportal.com/api/Provider/TotalPrincipal/` + `${Id}`
     fetch (`${api}`)
     .then(response =>{
       if(response.ok){
@@ -75,7 +75,7 @@ function Main() {
       // setError(error)
     })
     // eslint-disable-next-line no-useless-concat
-    let td = `http://15.237.160.238:50/api/Provider/TotalDependant/` + `${Id}`
+    let td = `https://portal.lifeworthhmoportal.com/api/Provider/TotalDependant/` + `${Id}`
     fetch (`${td}`)
     .then(response =>{
       if(response.ok){

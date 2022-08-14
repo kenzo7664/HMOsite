@@ -1,6 +1,6 @@
 export function PostData(type, userData){
     let online = navigator.onLine? "online" :'offline'
-    let BaseUrl = "http://15.237.160.238:50/api/"
+    let BaseUrl = "https://portal.lifeworthhmoportal.com/api/"
 
     return new Promise((resolve,reject)=>{
        if(online === "online"){

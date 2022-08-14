@@ -14,7 +14,7 @@ function SearchEnrollee () {
   const providerId = Number( sessionStorage.getItem("id"))
   const searchItems = (searchValue) => {
     setSearchInput(searchValue)
-      axios.get(`http://15.237.160.238:50/api/Employee?IdProvider=${providerId}&FullName=${searchValue}`) 
+      axios.get(`https://portal.lifeworthhmoportal.com/api/Employee?IdProvider=${providerId}&FullName=${searchValue}`) 
     .then((response) => {
       setApiData(response.data)
       if(response.data.length >=1){
@@ -45,7 +45,7 @@ function SearchEnrollee () {
 
   const searchName = (searchValue) => {
     setSearchInput(searchValue)
-      axios.get(`http://15.237.160.238:50/api/Employee?IdProvider=${providerId}&Surname=${searchValue}`) 
+      axios.get(`https://portal.lifeworthhmoportal.com/api/Employee?IdProvider=${providerId}&Surname=${searchValue}`) 
     .then((response) => {
       setApiData(response.data)
       if(response.data.length >=1){
@@ -76,7 +76,7 @@ function SearchEnrollee () {
   const searchEmployeeNumber = (searchId) => {
     setSearchEmployee(searchId)
     if(searchId.includes('~')){
-       axios.get(`http://15.237.160.238:50/api/Dependant?idProvider=${providerId}&DependantNumber=${searchId}`)
+       axios.get(`https://portal.lifeworthhmoportal.com/api/Dependant?idProvider=${providerId}&DependantNumber=${searchId}`)
        .then((response)=>{
         setApiData(response.data)
         if(response.data.length >= 1){
@@ -104,7 +104,7 @@ function SearchEnrollee () {
      
        })
     } else {
-       axios.get(`http://15.237.160.238:50/api/Employee?IdProvider=${providerId}&EmployeeNumber=${searchId}`)
+       axios.get(`https://portal.lifeworthhmoportal.com/api/Employee?IdProvider=${providerId}&EmployeeNumber=${searchId}`)
        .then((response)=>{
         setApiData(response.data)
         if(response.data.length >= 1){

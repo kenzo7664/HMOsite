@@ -16,7 +16,8 @@ function Claims() {
   let claims = [] 
   let date = (new Date().getFullYear());
   const [option,setOption] = useState([])
-  const [options,setOptions] = useState()
+  const [desc, setDesc] = useState("")
+  const [options,setOptions] = useState(0)
   const [content , setContent] = useState("")
   const[apiDataMedical,  setApiDataMedical] = useState([])
   const [searchInput, setSearchInput] = useState({});
@@ -24,7 +25,6 @@ function Claims() {
   const[apiData,  setApiData] = useState([])
   const [amountCalc, setAmountCalc] = useState(0)
   const[apiDataAuthor,  setApiDataAuthor] = useState([])
-  const [diagnosisCode,  setDiagnosisCode] = useState("")
   const [codes, setCodes] = useState("")
   const [type,  setType] = useState("")
   const [proType] = useState('str')
@@ -37,7 +37,7 @@ function Claims() {
   
   const searchItems = (searchValue) => {
     setSearchInput(searchValue)
-      axios.get(`http://15.237.160.238:50/api/Employee?IdProvider=${providerId}&FullName=${searchValue}`) 
+      axios.get(`https://portal.lifeworthhmoportal.com/api/Employee?IdProvider=${providerId}&FullName=${searchValue}`) 
     .then((response) => {
       setApiData(response.data)
       setType("Principal")
@@ -71,7 +71,7 @@ function Claims() {
   const searchEmployeeNumber = (searchId) => {
     setSearchEmployee(searchId)
     if(searchId.includes('~')){
-       axios.get(`http://15.237.160.238:50/api/Dependant?idProvider=${providerId}&DependantNumber=${searchId}`)
+       axios.get(`https://portal.lifeworthhmoportal.com/api/Dependant?idProvider=${providerId}&DependantNumber=${searchId}`)
        .then((response)=>{
         setApiData(response.data)
         setType("Dependant")
@@ -100,7 +100,7 @@ function Claims() {
      
        })
     } else {
-       axios.get(`http://15.237.160.238:50/api/Employee?IdProvider=${providerId}&EmployeeNumber=${searchId}`)
+       axios.get(`https://portal.lifeworthhmoportal.com/api/Employee?IdProvider=${providerId}&EmployeeNumber=${searchId}`)
        .then((response)=>{
         setApiData(response.data)
         setType("Principal")
@@ -135,13 +135,13 @@ function Claims() {
   const handleSelect = (event)=>{
     setContent(event.target.value);
     if(content.includes('~')){
-      axios.get(`http://15.237.160.238:50/api/Dependant?idProvider=${providerId}&DependantNumber=${content}`)
+      axios.get(`https://portal.lifeworthhmoportal.com/api/Dependant?idProvider=${providerId}&DependantNumber=${content}`)
       .then((response)=>{
         setOption(...response.data)
         setType("Dependant")
       })
     } else if (content) {
-        axios.get(`http://15.237.160.238:50/api/Employee?IdProvider=${providerId}&EmployeeNumber=${content}`)
+        axios.get(`https://portal.lifeworthhmoportal.com/api/Employee?IdProvider=${providerId}&EmployeeNumber=${content}`)
         .then((response)=>{
           setType('Principal')
           setOption(...response.data)
@@ -150,73 +150,84 @@ function Claims() {
     }
     
   }
-
+  
+  const Medical = () => {
+    axios.get(`https://portal.lifeworthhmoportal.com/api/Classification`)
+ .then((response) => {
+   setApiDataMedical(response.data)
+   if(apiDataMedical){
+     toast("Classifications Fetched Succesfully", {
+       duration: 4000,
+       style: {
+       borderRadius: '10px',
+       background: '#F8A370',
+       color: '#fff',
+    },
+     },
+     )
+   }
+ })
+ 
+ 
+}
  
   const Diagnosis = (e) => {
-       axios.get(`http://15.237.160.238:50/api/Diagnosis`)
+       axios.get(`https://portal.lifeworthhmoportal.com/api/Diagnosis`)
     .then((response) => {
       setApiDataAuthor(response.data)
-      if(apiDataAuthor){
-       toast("Diagnosis Fetched Succesfully", {
-          duration: 4000,
-          style: {
-          borderRadius: '10px',
-          background: '#F8A370',
-          color: '#fff',
-       },
-        },
-        )
-      }
+      // if(apiDataAuthor){
+      //  toast("Diagnosis Fetched Succesfully", {
+      //     duration: 4000,
+      //     style: {
+      //     borderRadius: '10px',
+      //     background: '#F8A370',
+      //     color: '#fff',
+      //  },
+      //   },
+      //   )
+      // }
     })
-   const code =  apiDataAuthor.filter((data)=>
-      (data.diagnosis === e.target.value) 
-    ).map(data=>data.diagnosisCode)
-    if (apiDataAuthor){setDiagnosisCode(...code)}
-  }
- 
- 
- 
-  const Medical = () => {
-       axios.get(`http://15.237.160.238:50/api/Classification`)
-    .then((response) => {
-      setApiDataMedical(response.data)
-      if(apiDataMedical){
-        toast("Classifications Fetched Succesfully", {
-          duration: 4000,
-          style: {
-          borderRadius: '10px',
-          background: '#F8A370',
-          color: '#fff',
-       },
-        },
-        )
-      }
+    .then(()=>{
+      setDesc(e.target.value)
+      Medical()
     })
-  }
-
-
-  const Description = (event) => {
-       axios.get(`http://15.237.160.238:50/api/Classification`)
-    .then((response) => {
-      setApiDataMedical(response.data)
-    const price = apiDataMedical.filter((data)=>(data.description === event.target.value)).map(data => data.price)
-    setOptions(...price)
-    if(options){
-       toast("Unit Price Fetched Succesfully", { 
-          style: {
-          borderRadius: '10px',
-          background: '#F8A370',
-          color: '#fff',
-       },
-        },
-        )
-    }
-   
+    .catch((error)=>{
+      console.error(error)
+    })
+    console.log(e.target.value);
   
-    })
-     
+  
+   
+  }
+ 
+ 
+  
+ 
+
+  const Description = (e) => {
+    console.log("hhh", apiDataMedical,e.target.value);
+    if(desc === ""){
+      alert("Select a Diagnosis")
+    } else{
+      const price = apiDataMedical.filter((data)=>(data.description === e.target.value)).map(data => data.price)
+      console.log(price);
+      setOptions(...price)
+      if(options){
+         toast("Unit Price Fetched Succesfully", { 
+            style: {
+            borderRadius: '10px',
+            background: '#F8A370',
+            color: '#fff',
+         },
+          },
+          )
+      }  
+    }
     
   }
+
+
+ 
 
   const chargesApproved =()=>{
     const value = Number(document.getElementById('charges').value)
@@ -266,11 +277,11 @@ function Claims() {
      console.log(e.target.value);
      setCodes(e.target.value)
   }
-  const defaultValues = {"chargesSent":amountCalc ,"authorcode":codes,"consultancyDate":"","qty":0, "details":"", "idProvider":providerId,"type":type, "protype":proType,"TreatmentDate":dates,"Day":day,"Month":month,"unitPrice":options}
+  const defaultValues = {"chargesSent":amountCalc ,"authorcode":codes,"consultancyDate":"","qty":0,"diagnosis":"", "details":"", "idProvider":providerId,"type":type, "protype":proType,"TreatmentDate":dates,"Day":day,"Month":month,"unitPrice":options}
   const { register, handleSubmit , reset } = useForm({defaultValues});
  
     const addUp = (data) =>{
-      
+      data.classification = data.diagnosis
       data.type = type
       data.chargesSent = amountCalc
       data.chargesApproved = amountCalc
@@ -296,7 +307,7 @@ function Claims() {
         authorcode: data.authorcode,
         chargesSent: data.chargesSent,
         chargesApproved:data.chargesSent,
-        classification:data.classification,
+        classification:data.diagnosis,
         consultancyDate: data.consultancyDate,
         details: data.details,
         diagnosis:data.diagnosis,
@@ -351,7 +362,7 @@ function Claims() {
      if(answer){
         axios
             .post(
-                'http://15.237.160.238:50/api/Claims',
+                'https://portal.lifeworthhmoportal.com/api/Claims',
                 claimsList,
                 { headers: { 'Content-Type': 'application/json' }}
             )
@@ -458,8 +469,7 @@ function Claims() {
         <div className='headin'>
           <div className='diagnosis'>
             <label htmlFor='diagnosis'>Diagnosis</label>
-            <select name='' className='diag' onClick={Diagnosis} value=
-            {options} {...register("diagnosis")} id='diag'>
+            <select name='' className='diag' onClick={Diagnosis} {...register("diagnosis")} id='diag'>
              {!apiDataAuthor ? <option value=''>--select--</option>
              : apiDataAuthor.map((data,index)=>(
                 <option key = {index} value={data.diagnosis} >{`${data.diagnosis}`}</option>))}
@@ -471,10 +481,10 @@ function Claims() {
           </div>
          
           
-          <div className='ICD-code'>
+          {/* <div className='ICD-code'>
             <label htmlFor='diagnosis' >ICD Code</label>
             <input type='text' className='' value={diagnosisCode}    />
-          </div>
+          </div> */}
           
           
           <div className='Consultation-date'>
@@ -487,19 +497,19 @@ function Claims() {
         <div className='medicals'>
           <div className='section-1'>
             <div className='classification-desc'>
-              <label htmlFor=''>Classification</label>
-              <select name='' id='' className='charges-approved' onClick={Medical} {...register("classification")} required>
+              <label htmlFor=''>Description : </label>
+              <select name='' id='' className='description' onClick={Description} {...register("Description")} required>
                {!apiDataMedical ? <option value=''>--select--</option>
              : apiDataMedical.map((data,index)=>(
-                <option key = {index} value={data.classification}>{`${data.classification}`}</option>))}
+                <option key = {index} value={data.description}>{`${data.description}`}</option>))}
               </select>
-              <label htmlFor=''>Description</label>
+              {/* <label htmlFor=''>Description</label>
               <select name='' id='' className='charges-approved' onClick={Description} {...register("Description")} required>
                {!apiDataMedical ? <option value=''>--select--</option>
              : apiDataMedical.map((data,index)=>{
                return  <><option key={index} value={data.description}>{`${data.description}`}</option><input type='text' className='charges-approved' /></>
                })}
-              </select>
+              </select> */}
             </div>
             <div className='approved'>
               <label htmlFor=''>No of days/Qty:</label>
@@ -533,7 +543,7 @@ function Claims() {
          
       <thead>
         <tr>
-          <th>Classification</th>
+          
           <th>Description</th>
           <th>Diagnosis</th>
           <th>Consultancy Date</th>
@@ -548,7 +558,6 @@ function Claims() {
       {claimsList.map((data,index)=>(
       <tbody className='size'>
         <tr key = {index}>
-          <td>{data.classification}</td>
           <td>{data.description}</td>
           <td>{data.diagnosis}</td>
           <td>{data.consultancyDate.substring(0,10)}</td>

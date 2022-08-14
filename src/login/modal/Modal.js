@@ -21,7 +21,7 @@ function Modal() {
     let gu = JSON.stringify(item)
     console.log(gu);
     
-    await fetch("http://15.237.160.238:50/api/Account/RequestToken",{
+    await fetch("https://portal.lifeworthhmoportal.com/api/Account/RequestToken",{
      method:'POST',
      headers:{
        "Content-Type": "application/json",

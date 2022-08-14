@@ -14,7 +14,7 @@ function List (){
 
 
   useEffect(()=>{
-      axios.get(`http://15.237.160.238:50/api/Claims?IdProvider=${providerId}&pageNumber=1&pageSize=100`)
+      axios.get(`https://portal.lifeworthhmoportal.com/api/Claims?IdProvider=${providerId}&pageNumber=1&pageSize=10`)
       .then((response)=>{
           setClaimsList(response.data)
           console.log(response.data);
@@ -34,7 +34,7 @@ return (
       <th>FullName</th>
       <th>EmployeeNo.</th>
       <th>Diagnosis</th>
-      <th>Classification</th>
+      <th>Treatment Date</th>
       <th>Description</th>
       
       <th>Charges Sent</th>
@@ -47,7 +47,7 @@ return (
       <td>{data.employeeName}</td>
       <td >{data.employeeNo}</td>
       <td>{data.diagnosis}</td>
-      <td>{data.classification}</td>
+      <td>{data.treatmentDate.substring(0,10)}</td>
       <td>{data.description}</td>
        
        <td>{data.chargesSent}</td>
